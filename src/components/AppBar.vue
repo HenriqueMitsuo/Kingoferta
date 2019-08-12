@@ -16,11 +16,13 @@
         </v-list-item>
         <v-list-item-group color="deep-purple accent-1">
             <v-list-item to="/" dark>
+            <v-list-item-icon><v-icon>mdi-home</v-icon></v-list-item-icon>
             <v-list-item-content>
                 <v-list-item-title>Home</v-list-item-title>
             </v-list-item-content>
         </v-list-item>
         <v-list-item to="/about" dark>
+            <v-list-item-icon><v-icon>mdi-information</v-icon></v-list-item-icon>
             <v-list-item-content>
                 <v-list-item-title router:to="/about">About</v-list-item-title>
             </v-list-item-content>
