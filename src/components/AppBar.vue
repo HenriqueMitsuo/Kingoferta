@@ -14,19 +14,14 @@
                 <v-img src="..\assets\Logo_KingOferta.png"></v-img>
             </v-list-item-content>
         </v-list-item>
+        <v-divider></v-divider>
         <v-list-item-group color="deep-purple accent-1">
-            <v-list-item to="/" dark>
-            <v-list-item-icon><v-icon>mdi-home</v-icon></v-list-item-icon>
-            <v-list-item-content>
-                <v-list-item-title>Home</v-list-item-title>
-            </v-list-item-content>
-        </v-list-item>
-        <v-list-item to="/about" dark>
-            <v-list-item-icon><v-icon>mdi-information</v-icon></v-list-item-icon>
-            <v-list-item-content>
-                <v-list-item-title router:to="/about">About</v-list-item-title>
-            </v-list-item-content>
-        </v-list-item>
+            <v-list-item v-for="link in links" :key="link.text" :to="link.route" dark>
+                <v-list-item-icon><v-icon>{{ link.icon }}</v-icon></v-list-item-icon>
+                <v-list-item-content>
+                    <v-list-item-title>{{ link.text }}</v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
         </v-list-item-group>
     </v-navigation-drawer>
 
@@ -37,7 +32,11 @@
 export default {
     data() {
         return {
-            drawer: false
+            drawer: false,
+            links: [
+                {icon: 'mdi-home', text: 'Home', route: '/'},
+                {icon: 'mdi-information', text: 'About', route: '/about'},
+            ]
         }
     }
 }
