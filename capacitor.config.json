@@ -1,0 +1,7 @@
+{
+  "appId": "br.com.kingoferta",
+  "appName": "king_oferta",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www"
+}
