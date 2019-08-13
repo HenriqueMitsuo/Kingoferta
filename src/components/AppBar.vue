@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <nav>
     <v-app-bar flat color="deep-purple" dark>
         <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
         <v-toolbar-title>
@@ -8,7 +8,7 @@
         </v-toolbar-title>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" class="deep-purple" app>
+    <v-navigation-drawer v-model="drawer" class="deep-purple" app temporary>
         <v-list-item>
             <v-list-item-content>
                 <v-img src="..\assets\Logo_KingOferta.png"></v-img>
@@ -25,7 +25,7 @@
         </v-list-item-group>
     </v-navigation-drawer>
 
-  </div>
+  </nav>
 </template>
 
 <script>
