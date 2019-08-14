@@ -36,6 +36,7 @@ export default {
             links: [
                 {icon: 'mdi-home', text: 'Home', route: '/'},
                 {icon: 'mdi-information', text: 'About', route: '/about'},
+                {icon: 'mdi-magnify', text: 'Consulta', route: '/consulta'},
             ]
         }
     }
