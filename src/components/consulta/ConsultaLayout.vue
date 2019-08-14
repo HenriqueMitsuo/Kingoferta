@@ -1,18 +1,26 @@
 <template>
-    <v-list elevation="2">
-        <v-subheader>Categorias</v-subheader>
-        <v-list-item-group>
-            <v-list-item v-for="category in categories" :key="category.name" color="primary" >
-                <v-list-item-avatar>
-                    <v-icon>{{category.icon}}</v-icon>
-                </v-list-item-avatar>
+    <v-container>
+        <!-- align e justify centralizam o conteudo nno novo grid (Vuetify 2.0) -->
+        <v-row align="center" justify="center">
+            <!-- Nova forma de definir o numero de colunas utilizado em cada tamanho de tela -->
+            <v-col xs="12" lg="9" md="6">
+                <v-list elevation="2">
+                    <v-subheader class="headline">Categorias</v-subheader>
+                    <v-list-item-group>
+                        <v-list-item v-for="category in categories" :key="category.name" color="primary" >
+                            <v-list-item-avatar>
+                                <v-icon>{{category.icon}}</v-icon>
+                            </v-list-item-avatar>
 
-                <v-list-item-content>
-                    <v-list-item-title>{{category.name}}</v-list-item-title>
-                </v-list-item-content>
-            </v-list-item>
-        </v-list-item-group>
-    </v-list>
+                            <v-list-item-content>
+                                <v-list-item-title>{{category.name}}</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </v-list-item-group>
+                </v-list>
+            </v-col>    
+        </v-row>    
+    </v-container>   
 </template>
 
 <script>
@@ -28,7 +36,7 @@ export default {
                 {name: 'Posto de Combustivel', icon: 'mdi-gas-station', sub_category:[]},
                 {name: 'jonas', icon:'mdi-home', sub_category:[]}
             ],
-            img: require('../../assets/Logo_KingOferta.png')
+            route: '/'
         }
     },
 }
