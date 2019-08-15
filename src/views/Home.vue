@@ -4,7 +4,7 @@
     <v-card class="mx-auto" outlined>
       <v-list-item three-line>
         <v-list-item-content>
-          <div class="overline mb-4">Versão 1.0.0</div>
+          <div class="overline mb-4">Peruíbe</div>
           <v-list-item-title class="headline mb-1"><span class="font-weight-light">King</span><span>Ofertas</span></v-list-item-title>
           <v-list-item-subtitle>Aplicativo para cotação de preços</v-list-item-subtitle>
         </v-list-item-content>
