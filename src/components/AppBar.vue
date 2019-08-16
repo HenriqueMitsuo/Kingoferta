@@ -35,6 +35,7 @@ export default {
             drawer: false,
             links: [
                 {icon: 'mdi-home', text: 'Home', route: '/'},
+                {icon: 'mdi-magnify', text: 'Consulta', route: '/consulta'},
                 {icon: 'mdi-information', text: 'Sobre', route: '/about'},
             ]
         }

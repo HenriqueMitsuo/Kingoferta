@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-
     <v-card class="mx-auto" outlined>
       <v-list-item three-line>
         <v-list-item-content>
@@ -38,12 +37,9 @@
   <v-footer absolute class="font-weight-light">
     <v-col class="text-center" cols="12">2019 - <strong>PixelBox</strong></v-col>
   </v-footer>
-
   </div>
 </template>
-
 <script>
-
 export default {
   name: 'home',
   data() {
