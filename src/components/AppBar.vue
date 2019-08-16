@@ -9,7 +9,7 @@
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" class="primary" app temporary>
-        <v-list-item>
+        <v-list-item> 
             <v-list-item-content>
                 <v-img src="..\assets\Logo_KingOferta.png"></v-img>
             </v-list-item-content>
@@ -35,8 +35,8 @@ export default {
             drawer: false,
             links: [
                 {icon: 'mdi-home', text: 'Home', route: '/'},
-                {icon: 'mdi-information', text: 'About', route: '/about'},
                 {icon: 'mdi-magnify', text: 'Consulta', route: '/consulta'},
+                {icon: 'mdi-information', text: 'Sobre', route: '/about'},
             ]
         }
     }
