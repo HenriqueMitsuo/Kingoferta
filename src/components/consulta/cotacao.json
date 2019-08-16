@@ -1,7 +1,7 @@
 [
     {
         "id": "1",
-        "nome": "arroz 5Kg",
+        "nome": "Arroz 5Kg",
         "preco": "R$15,00",
         "local": "Magnânimo",
         "local_tipo": "Mercado",
@@ -9,23 +9,23 @@
     },
     {
         "id": "2",
-        "nome": "feijão 1Kg",
+        "nome": "Feijão 1Kg",
         "preco": "R$3,50",
         "local": "Magnânimo",
         "local_tipo": "Mercado",
-        "cidade": "cajati"
+        "cidade": "peruibe"
     },
     {
         "id": "3",
-        "nome": "pão francês 1Kg",
+        "nome": "Pão francês 1Kg",
         "preco": "R$5,60",
         "local": "Padaria Vitória",
         "local_tipo": "Padaria",
-        "cidade": "cajati"
+        "cidade": "peruibe"
     },
     {
         "id": "4",
-        "nome": "carne moída 1Kg",
+        "nome": "Carne moída 1Kg",
         "preco": "R$18,30",
         "local": "Tio Beba",
         "local_tipo": "Mercado",
@@ -37,6 +37,70 @@
         "preco": "R$500,00",
         "local": "Magnânimo",
         "local_tipo": "Mercado",
+        "cidade": "peruibe"
+    },
+    {
+        "id": "6",
+        "nome": "Queijo Prato 250g",
+        "preco": "R$13,49",
+        "local": "Padaria Vitória",
+        "local_tipo": "Padaria",
+        "cidade": "peruibe"
+    },
+    {
+        "id": "7",
+        "nome": "Feijão 1Kg",
+        "preco": "R$4,50",
+        "local": "Tio beba",
+        "local_tipo": "Mercado",
+        "cidade": "peruibe"
+    },
+    {
+        "id": "8",
+        "nome": "Detergente Unid",
+        "preco": "R$1,35",
+        "local": "Tio beba",
+        "local_tipo": "Mercado",
+        "cidade": "peruibe"
+    },
+    {
+        "id": "9",
+        "nome": "Macarrão Espagheti Unid",
+        "preco": "R$20,50",
+        "local": "Tio beba",
+        "local_tipo": "Mercado",
+        "cidade": "peruibe"
+    },
+    {
+        "id": "10",
+        "nome": "Pão de queijo 600g",
+        "preco": "R$20,00",
+        "local": "Padaria Vitória",
+        "local_tipo": "Padaria",
+        "cidade": "peruibe"
+    },
+    {
+        "id": "11",
+        "nome": "Cloro 1Lt",
+        "preco": "R$10,50",
+        "local": "Tio beba",
+        "local_tipo": "Mercado",
+        "cidade": "peruibe"
+    },
+    {
+        "id": "13",
+        "nome": "Dorflex 10 comprimidos",
+        "preco": "R$4,42",
+        "local": "Farmácia Sabrina",
+        "local_tipo": "Farmácia",
+        "cidade": "peruibe"
+    },
+    {
+        "id": "14",
+        "nome": "Dipirona 10 comprimidos",
+        "preco": "R$3,54",
+        "local": "Farmácia Sabrina",
+        "local_tipo": "Farmácia",
         "cidade": "peruibe"
     }
 ]

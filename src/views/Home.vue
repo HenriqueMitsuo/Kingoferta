@@ -32,7 +32,7 @@
       </v-row>
     </v-container>
 
-    <v-btn color="primary" block><v-icon>mdi-magnify</v-icon> Procurar</v-btn>
+    <v-btn color="primary" :to="route" block><v-icon>mdi-magnify</v-icon> Procurar</v-btn>
 
   <v-footer absolute class="font-weight-light">
     <v-col class="text-center" cols="12">2019 - <strong>PixelBox</strong></v-col>
@@ -44,6 +44,7 @@ export default {
   name: 'home',
   data() {
     return {
+      route: '/consulta/produto/2',
       statistics: [
         {icon: 'mdi-city-variant', quantity: '7', text: "Cidades"},
         {icon: 'mdi-store', quantity: '14', text: "Lojas"},

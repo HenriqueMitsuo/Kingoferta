@@ -6,11 +6,11 @@
         <v-text-field
             v-model="filters.name"
             append-icon="mdi-magnify"
-            label="Name"
+            label="Produto, Cidade, Estabelecimento"
             single-line
             hide-details>
         </v-text-field>
-        <v-spacer></v-spacer>
+        <!-- <v-spacer></v-spacer> -->
         <!-- <v-select
             append-icon="mdi-magnify"
             v-model="filters.cidade"
@@ -21,20 +21,22 @@
             single-line
             hide-details>
         </v-select> -->
-        <v-text-field
+        <!-- <v-text-field
             v-model="cidade"
             append-icon="mdi-magnify"
             label="cidade"
             single-line
             hide-details>
-        </v-text-field>
+        </v-text-field> -->
     </v-card-title>
 
     <v-data-table
       :headers="headers"
       :items="produtos"
       item-key="id"
-      :search="filters.name">
+      :search="filters.name"
+      items-per-page="5"
+      mobile-breakpoint="400">
     </v-data-table>
   </v-card>
 </template>
@@ -60,7 +62,7 @@ export default {
                 { text: 'Preço', value: 'preco' },
                 { text: 'Local Nome', value: 'local' },
                 { text: 'Local Estabelecimento', value: 'local_tipo' },
-                { text: 'Cidade', value: 'cidade',  }
+                
             ]
         },
     },
