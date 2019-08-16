@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title>
-        Nutrition
+        <h3>Cotação</h3> 
         <v-spacer></v-spacer>
         <v-text-field
             v-model="filters.name"
@@ -11,10 +11,20 @@
             hide-details>
         </v-text-field>
         <v-spacer></v-spacer>
-        <v-text-field
-            v-model="filters.calories"
+        <!-- <v-select
             append-icon="mdi-magnify"
-            label="Calories"
+            v-model="filters.cidade"
+            :items="produtos"
+            item-text="cidade"
+            item-value="cidade"
+            label="Cidades"
+            single-line
+            hide-details>
+        </v-select> -->
+        <v-text-field
+            v-model="cidade"
+            append-icon="mdi-magnify"
+            label="cidade"
             single-line
             hide-details>
         </v-text-field>
@@ -22,40 +32,36 @@
 
     <v-data-table
       :headers="headers"
-      :items="filterName">
+      :items="produtos"
+      item-key="id"
+      :search="filters.name">
     </v-data-table>
   </v-card>
 </template>
 
 <script>
-import Placeholder from "./get.json"
+import Placeholder from "./cotacao.json"
 export default {
     name: 'ConsultaTabela',
     data() {
         return {
-            filters: { name: '', calories: '' },
-            search: 'tesete',
-            headers: [
-                { text: 'Dessert (100g serving)', align: 'left', sortable: false, value: 'name' },
-                { text: 'Calories', value: 'calories' },
-                { text: 'Fat (g)', value: 'fat' },
-                { text: 'Carbs (g)', value: 'carbs' },
-                { text: 'Protein (g)', value: 'protein' },
-                { text: 'Iron (%)', value: 'iron' },
-            ],
-            desserts: [],
+            filters: { nome: '', local_nome: '', local_estabelecimento: '', cidade: '' },
+            cidade: '',
+            produtos: [],
         }
     },
     created () {
-        this.desserts = Placeholder;
+        this.produtos = Placeholder;
     },
     computed: {
-        // https://front.id/en/articles/vuetify-achieve-multiple-filtering-data-table-component
-        // https://www.youtube.com/watch?v=KSHmxn2fgv0
-        filterName: function(){
-            return this.desserts.filter((dessert) => {
-                return dessert.name.match(this.filters.name)
-            });
+        headers () {
+            return [
+                { text: 'Produto', align: 'left', sortable: false, value: 'nome' },
+                { text: 'Preço', value: 'preco' },
+                { text: 'Local Nome', value: 'local' },
+                { text: 'Local Estabelecimento', value: 'local_tipo' },
+                { text: 'Cidade', value: 'cidade',  }
+            ]
         },
     },
 }

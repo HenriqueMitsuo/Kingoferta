@@ -1,0 +1,42 @@
+[
+    {
+        "id": "1",
+        "nome": "arroz 5Kg",
+        "preco": "R$15,00",
+        "local": "Magnânimo",
+        "local_tipo": "Mercado",
+        "cidade": "peruibe"
+    },
+    {
+        "id": "2",
+        "nome": "feijão 1Kg",
+        "preco": "R$3,50",
+        "local": "Magnânimo",
+        "local_tipo": "Mercado",
+        "cidade": "cajati"
+    },
+    {
+        "id": "3",
+        "nome": "pão francês 1Kg",
+        "preco": "R$5,60",
+        "local": "Padaria Vitória",
+        "local_tipo": "Padaria",
+        "cidade": "cajati"
+    },
+    {
+        "id": "4",
+        "nome": "carne moída 1Kg",
+        "preco": "R$18,30",
+        "local": "Tio Beba",
+        "local_tipo": "Mercado",
+        "cidade": "peruibe"
+    },
+    {
+        "id": "5",
+        "nome": "Bicicleta Unid",
+        "preco": "R$500,00",
+        "local": "Magnânimo",
+        "local_tipo": "Mercado",
+        "cidade": "peruibe"
+    }
+]
