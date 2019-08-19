@@ -33,10 +33,6 @@
     </v-container>
 
     <v-btn color="primary" block><v-icon>mdi-magnify</v-icon> Procurar</v-btn>
-
-  <v-footer absolute class="font-weight-light">
-    <v-col class="text-center" cols="12">2019 - <strong>PixelBox</strong></v-col>
-  </v-footer>
   </div>
 </template>
 <script>
