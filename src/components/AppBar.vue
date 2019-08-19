@@ -15,17 +15,12 @@
             </v-list-item-content>
         </v-list-item>
 
-        <v-divider></v-divider>
-
-        <v-list-item color="white" to='/login' dark link>
-            <v-list-item-avatar><v-icon>mdi-account</v-icon></v-list-item-avatar>
+        <v-list-item>
             <v-list-item-content>
-                <v-list-item-title>Usuário</v-list-item-title>
-                <v-list-item-subtitle>email@email.com</v-list-item-subtitle>
-            </v-list-item-content>
-        </v-list-item>
-        
-        <v-divider></v-divider>
+                <LoginDialog />
+            </v-list-item-content>         
+        </v-list-item>   
+    
         <v-list-item-group color="secondary">
             <v-list-item v-for="link in links" :key="link.text" :to="link.route" dark>
                 <v-list-item-icon><v-icon>{{ link.icon }}</v-icon></v-list-item-icon>
@@ -40,6 +35,8 @@
 </template>
 
 <script>
+import LoginDialog from './login/LoginDialog'
+
 export default {
     data() {
         return {
@@ -50,6 +47,9 @@ export default {
                 {icon: 'mdi-information', text: 'Sobre', route: '/about'},
             ]
         }
+    },
+    components: {
+        LoginDialog,
     }
 }
 </script>
