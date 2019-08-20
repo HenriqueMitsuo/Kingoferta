@@ -5,7 +5,7 @@
             <v-text-field v-model="name" label="Nome" prepend-inner-icon="mdi-account" filled required />    
             <v-dialog ref="dialog" v-model="modal" :return-value.sync="date" persistent full-width width="290px">
                 <template v-slot:activator="{ on }"><v-text-field v-model="date" label="Data de nascimento" prepend-inner-icon="mdi-calendar-range" filled readonly v-on="on"/></template>
-                <v-date-picker v-model="date" scrollable>
+                <v-date-picker locale="pt-br" v-model="date" scrollable>
                     <v-spacer/>
                     <v-btn text color="primary" @click="modal = false">Cancelar</v-btn>
                     <v-btn text color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
