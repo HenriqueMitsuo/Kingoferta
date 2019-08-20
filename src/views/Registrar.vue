@@ -21,13 +21,8 @@
 
               <v-stepper-content class="pa-6" step="2">
                   <PesquisaLayout />
-                  <v-btn tile color="green" @click="e1 = 3">Continuar</v-btn>
+                  <v-btn tile color="green" to="/home">Continuar</v-btn>
                   <v-btn tile text @click="e1 = 1">Cancelar</v-btn>
-              </v-stepper-content>
-
-              <v-stepper-content step="3">
-                  <v-btn tile color="green">Concluir</v-btn>
-                  <v-btn tile text @click="e1 = 2">Cancelar</v-btn>
               </v-stepper-content>
 
           </v-stepper-items>
