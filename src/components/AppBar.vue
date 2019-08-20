@@ -42,7 +42,7 @@ export default {
         return {
             drawer: false,
             links: [
-                {icon: 'mdi-home', text: 'Home', route: '/'},
+                {icon: 'mdi-home', text: 'Home', route: '/home'},
                 {icon: 'mdi-magnify', text: 'Consulta', route: '/consulta'},
                 {icon: 'mdi-information', text: 'Sobre', route: '/about'},
             ]
