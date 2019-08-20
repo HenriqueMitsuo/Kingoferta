@@ -2,7 +2,7 @@
   <v-flex>
       <v-form>
         <v-checkbox v-model="checkbox" label="Possuo curso superior"></v-checkbox>
-        <v-combobox label="Interesse em algum curso?" filled required/>
+        <v-select v-model="select" :items="itemsNaoSuperior" label="Interesse em algum curso?" filled required/>
       </v-form> 
   </v-flex>
 </template>
@@ -13,6 +13,11 @@ export default {
     data () {
         return {
             checkbox: true,
+            select: 'Nenhum',
+            itemsNaoSuperior: [
+              'Administração - Presencial',
+              'Análise e Des. de Sistemas - Presencial'
+            ]
         }
     },
 }

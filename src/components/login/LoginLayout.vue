@@ -15,7 +15,8 @@
                 <div class="mb-2">
                     <v-btn rounded large block color="green" to="/home" dark><v-icon left>mdi-login</v-icon>Entrar</v-btn>
                 </div>
-                <v-btn rounded large block color="accent" to="/registrar" dark><v-icon left>mdi-pencil</v-icon>Registrar</v-btn>
+                <!-- <v-btn rounded large block color="accent" to="/registrar" dark><v-icon left>mdi-pencil</v-icon>Registrar</v-btn> -->
+                <RegistrarDialog />
             </v-form>
         </v-container>
     </v-card>
@@ -23,6 +24,8 @@
 </template>
 
 <script>
+import RegistrarDialog from '../registrar/RegistrarDialog'
+
 export default {
     data: () => (
         {
@@ -41,6 +44,9 @@ export default {
         closeDialog : function() {
             this.$emit('close-dialog')
         }
+    },
+    components: {
+        RegistrarDialog,
     }
 }
 </script>
