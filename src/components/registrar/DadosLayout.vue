@@ -11,25 +11,31 @@
                 </v-date-picker>            
             </v-dialog>
             <v-select v-model="select" :items="items" label="Gênero" prepend-inner-icon="mdi-human-male-female" filled required></v-select>
-            <v-text-field v-model="cellphone" label="Celular" prepend-inner-icon="mdi-contact-phone" filled required></v-text-field>
+            <v-text-field v-model="cellphone" v-mask="maskPhone" label="Celular" prepend-inner-icon="mdi-contact-phone" filled required></v-text-field>
             <v-text-field v-model="password"  :type="showPass ? 'text' : 'password'" :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'" @click:append="showPass = !showPass" label="Senha" filled prepend-inner-icon="mdi-key"></v-text-field>
         </v-form>        
     </div>
 </template>
 
 <script>
+import { mask } from 'vue-the-mask'
+
 export default {
     name: 'DadosLayout',
     data: () => ({
         date: new Date().toISOString().substr(0, 10),
         modal: false,
         showPass: false,
+        maskPhone: '(##) ##### - ####',
         select: 'Selecionar',
         items: [
             'Masculino',
             'Feminino',
         ]
     }),
+    directives: {
+        mask,
+    }
 }
 </script>
 
