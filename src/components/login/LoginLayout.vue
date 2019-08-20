@@ -15,7 +15,7 @@
                 <div class="mb-2">
                     <v-btn rounded large block color="green" to="/home" dark><v-icon left>mdi-login</v-icon>Entrar</v-btn>
                 </div>
-                <v-btn rounded large block color="secondary" dark><v-icon left>mdi-pencil</v-icon>Cadastrar</v-btn>
+                <v-btn rounded large block color="accent" to="/registrar" dark><v-icon left>mdi-pencil</v-icon>Registrar</v-btn>
             </v-form>
         </v-container>
     </v-card>
