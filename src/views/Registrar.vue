@@ -1,7 +1,7 @@
 <template>
   <div>
-      <v-stepper dark class="primary elevation-0" v-model="e1">
-
+      <v-overlay opacity="0" class="primary">
+          <v-stepper dark class="primary elevation-0" v-model="e1">
           <v-stepper-header class="elevation-0">
               <v-stepper-step color="accent" :complete="e1 > 1" step="1">Registrar dados</v-stepper-step>
               <v-divider/>
@@ -14,27 +14,33 @@
 
           <v-stepper-items>
               <v-stepper-content step="1">
-                 <DadosLayout />        
+                <DadosLayout />
+                <v-btn tile color="green" @click="e1 = 2">Continuar</v-btn>
+                <v-btn tile text to="/" @click="e1 = 1">Cancelar</v-btn>
               </v-stepper-content>
 
-              <v-stepper-content step="2">
-                  <v-btn color="primary" @click="e1 = 3">Continuar</v-btn>
-                  <v-btn text>Cancelar</v-btn>
+              <v-stepper-content class="pa-6" step="2">
+                  <PesquisaLayout />
+                  <v-btn tile color="green" @click="e1 = 3">Continuar</v-btn>
+                  <v-btn tile text @click="e1 = 1">Cancelar</v-btn>
               </v-stepper-content>
 
               <v-stepper-content step="3">
-                  <v-btn color="primary">Concluir</v-btn>
-                  <v-btn text>Cancelar</v-btn>
+                  <v-btn tile color="green">Concluir</v-btn>
+                  <v-btn tile text @click="e1 = 2">Cancelar</v-btn>
               </v-stepper-content>
 
           </v-stepper-items>
 
       </v-stepper>
+      </v-overlay>
+      
   </div>
 </template>
 
 <script>
 import DadosLayout from '../components/registrar/DadosLayout'
+import PesquisaLayout from '../components/registrar/PesquisaLayout'
 
 export default {
     data () {
@@ -44,6 +50,7 @@ export default {
     },
     components: {
         DadosLayout,
+        PesquisaLayout,
     },
 }
 </script>
