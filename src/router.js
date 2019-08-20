@@ -7,6 +7,11 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
+      path: '/',
+      name: 'Login',
+      component: Login,
+    },
+    {
       path: '/home',
       name: 'home',
       component: () => import(/* webpackChunkName: "about" */ './views/Home.vue')
@@ -35,10 +40,5 @@ export default new Router({
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "about" */ './views/Produto.vue')
     },
-    {
-      path: '/',
-      name: 'Login',
-      component: Login,
-    }
   ]
 })
