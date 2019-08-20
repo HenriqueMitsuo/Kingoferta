@@ -18,7 +18,7 @@
                         <v-stepper-content step="1">
                             <DadosLayout />
                             <v-btn tile color="green" @click="e1 = 2">Continuar</v-btn>
-                            <v-btn tile text to="/" @click="e1 = 1">Cancelar</v-btn>
+                            <v-btn tile text @click="dialog = false">Cancelar</v-btn>
                         </v-stepper-content>
                         <v-stepper-content class="pa-6" step="2">
                             <PesquisaLayout />
@@ -40,6 +40,7 @@ export default {
     data () {
         return {
             e1: 0,
+            dialog: false,
         }
     },
     components: {
