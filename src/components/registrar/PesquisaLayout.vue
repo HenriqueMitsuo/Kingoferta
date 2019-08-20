@@ -2,7 +2,8 @@
   <v-flex>
       <v-form>
         <v-checkbox v-model="checkbox" label="Possuo curso superior"></v-checkbox>
-        <v-select v-model="select" :items="itemsNaoSuperior" label="Interesse em algum curso?" filled required/>
+        <v-select v-if="checkbox == true" v-model="select" :items="itemsNaoSuperior" label="Interesse em algum curso?" filled required/>
+        <v-select v-if="checkbox == false" v-model="select" :items="itemsSuperior" label="Interesse em algum curso?" filled required/>
       </v-form> 
   </v-flex>
 </template>
@@ -12,7 +13,7 @@ export default {
     name: 'PesquisaLayout',
     data () {
         return {
-            checkbox: true,
+            checkbox: false,
             select: 'Nenhum',
             itemsNaoSuperior: [
               'Administração - Presencial',
