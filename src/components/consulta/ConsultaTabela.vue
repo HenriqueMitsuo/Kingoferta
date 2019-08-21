@@ -35,14 +35,16 @@
       :items="produtos"
       item-key="id"
       :search="filters.name"
-      items-per-page=5
+      :loading="loading"
+      loading-text="Carregando..."
+      items-per-page=10
       mobile-breakpoint=400>
     </v-data-table>
   </v-card>
 </template>
 
 <script>
-import Placeholder from "./cotacao.json"
+// import Placeholder from "./cotacao.json"
 export default {
     name: 'ConsultaTabela',
     data() {
@@ -50,19 +52,37 @@ export default {
             filters: { nome: '', local_nome: '', local_estabelecimento: '', cidade: '' },
             cidade: '',
             produtos: [],
+            loading: 'true'
         }
     },
-    created () {
-        this.produtos = Placeholder;
+    async created () {
+        //this.produtos = Placeholder;
+        await fetch("http://unisepe-cotacao.gearhostpreview.com/pst_api/consultacotacao.php")
+            .then(Response => {
+                return Response.json();
+            })
+            .then(Data => {
+                return this.produtos = Data;
+            })
+            .then(() => {
+                return this.loading = 'false'
+            })
     },
     computed: {
+        // headers () {
+        //     return [
+        //         { text: 'Produto', align: 'left', sortable: false, value: 'nome' },
+        //         { text: 'Preço', value: 'preco' },
+        //         { text: 'Local Nome', value: 'local' },
+        //         { text: 'Local Estabelecimento', value: 'local_tipo' },
+        //     ]
+        // },
         headers () {
             return [
                 { text: 'Produto', align: 'left', sortable: false, value: 'nome' },
-                { text: 'Preço', value: 'preco' },
-                { text: 'Local Nome', value: 'local' },
-                { text: 'Local Estabelecimento', value: 'local_tipo' },
-                
+                { text: 'Local', value: 'estabelecimento' },
+                { text: 'Preço', value: 'valor' },
+                { text: 'Unidade', value: 'tipo' },
             ]
         },
     },
