@@ -32,7 +32,7 @@
       </v-row>
     </v-container>
 
-    <v-btn color="primary" block><v-icon>mdi-magnify</v-icon> Procurar</v-btn>
+    <v-btn color="primary" to="/consulta/produto/1" block><v-icon>mdi-magnify</v-icon> Procurar</v-btn>
   </div>
 </template>
 <script>

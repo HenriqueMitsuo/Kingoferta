@@ -35,8 +35,8 @@
       :items="produtos"
       item-key="id"
       :search="filters.name"
-      items-per-page="5"
-      mobile-breakpoint="400">
+      items-per-page=5
+      mobile-breakpoint=400>
     </v-data-table>
   </v-card>
 </template>
