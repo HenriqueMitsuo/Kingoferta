@@ -14,7 +14,21 @@
                 <v-img src="..\assets\Logo_KingOferta.png"></v-img>
             </v-list-item-content>
         </v-list-item>
+
         <v-divider></v-divider>
+
+        <v-list-item to="/" dark two-line>
+            <v-list-item-avatar>
+                <v-icon>mdi-account</v-icon>
+            </v-list-item-avatar>
+            <v-list-item-content>
+                <v-list-item-title>Usuário</v-list-item-title>
+                <v-list-item-subtitle>email@email</v-list-item-subtitle>
+            </v-list-item-content>
+        </v-list-item>   
+
+        <v-divider></v-divider>
+    
         <v-list-item-group color="secondary">
             <v-list-item v-for="link in links" :key="link.text" :to="link.route" dark>
                 <v-list-item-icon><v-icon>{{ link.icon }}</v-icon></v-list-item-icon>
@@ -29,16 +43,21 @@
 </template>
 
 <script>
+//import LoginDialog from './login/LoginDialog'
+
 export default {
     data() {
         return {
             drawer: false,
             links: [
-                {icon: 'mdi-home', text: 'Home', route: '/'},
+                {icon: 'mdi-home', text: 'Home', route: '/home'},
                 {icon: 'mdi-magnify', text: 'Consulta', route: '/consulta'},
                 {icon: 'mdi-information', text: 'Sobre', route: '/about'},
             ]
         }
+    },
+    components: {
+        //LoginDialog,
     }
 }
 </script>
