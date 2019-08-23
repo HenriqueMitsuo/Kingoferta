@@ -10,24 +10,6 @@
             single-line
             hide-details>
         </v-text-field>
-        <!-- <v-spacer></v-spacer> -->
-        <!-- <v-select
-            append-icon="mdi-magnify"
-            v-model="filters.cidade"
-            :items="produtos"
-            item-text="cidade"
-            item-value="cidade"
-            label="Cidades"
-            single-line
-            hide-details>
-        </v-select> -->
-        <!-- <v-text-field
-            v-model="cidade"
-            append-icon="mdi-magnify"
-            label="cidade"
-            single-line
-            hide-details>
-        </v-text-field> -->
     </v-card-title>
 
     <v-data-table
@@ -44,7 +26,6 @@
 </template>
 
 <script>
-// import Placeholder from "./cotacao.json"
 export default {
     name: 'ConsultaTabela',
     data() {
@@ -56,7 +37,6 @@ export default {
         }
     },
     async created () {
-        //this.produtos = Placeholder;
         await fetch("http://unisepe-cotacao.gearhostpreview.com/pst_api/consultacotacao.php")
             .then(Response => {
                 return Response.json();
@@ -69,14 +49,6 @@ export default {
             })
     },
     computed: {
-        // headers () {
-        //     return [
-        //         { text: 'Produto', align: 'left', sortable: false, value: 'nome' },
-        //         { text: 'Preço', value: 'preco' },
-        //         { text: 'Local Nome', value: 'local' },
-        //         { text: 'Local Estabelecimento', value: 'local_tipo' },
-        //     ]
-        // },
         headers () {
             return [
                 { text: 'Produto', align: 'left', sortable: false, value: 'nome' },
