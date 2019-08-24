@@ -13,7 +13,7 @@
                 <v-text-field v-model="email" :rules="emailRules" label="Email" prepend-inner-icon="mdi-email" outlined required></v-text-field>
                 <v-text-field v-model="password" :type="showPass ? 'text' : 'password'"  label="Senha" :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'" prepend-inner-icon="mdi-key" @click:append="showPass = !showPass" outlined required></v-text-field>
                 <div class="mb-2">
-                    <v-btn rounded large block color="green" to="/home" dark><v-icon left>mdi-login</v-icon>Entrar</v-btn>
+                    <v-btn rounded large block color="green" @click="sendLogin" dark><v-icon left>mdi-login</v-icon>Entrar</v-btn>
                 </div>
                 <!-- <v-btn rounded large block color="accent" to="/registrar" dark><v-icon left>mdi-pencil</v-icon>Registrar</v-btn> -->
                 <RegistrarDialog />
@@ -25,6 +25,7 @@
 
 <script>
 import RegistrarDialog from '../registrar/RegistrarDialog'
+import Axios from 'axios'
 
 export default {
     data: () => (
@@ -43,7 +44,11 @@ export default {
     methods: {
         closeDialog : function() {
             this.$emit('close-dialog')
-        }
+        },
+         sendLogin : async function() {
+            const response = await Axios.post('http://unisepe-cotacao.gearhostpreview.com/pst_api/loginValidacao.php/', {email: this.email, password: this.password});
+            console.log(response.data);
+         }
     },
     components: {
         RegistrarDialog,
