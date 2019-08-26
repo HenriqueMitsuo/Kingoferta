@@ -69,7 +69,7 @@ export default {
             
             if (response.data == 'ok') { 
                 this.loading = false;
-                this.$router.push('/home');
+                this.$router.push({name: 'home'});
             } else if (response.data != 'ok') {
                 this.loading = false;
                 this.snackColor = 'red';
