@@ -50,6 +50,7 @@ export default {
             
             if (response.data == 'ok') {
                 console.log('Login Validado!');
+                window.location.assign('#/home');
             } else {
                 console.log('Login Inválido!');
             }
