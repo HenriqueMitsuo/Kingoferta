@@ -57,18 +57,8 @@ export default {
                 email: this.email,
                 password: this.password
             });
-            
-            let axiosConfig = {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    "Access-Control-Allow-Origin": "*",
-                }
-            };
 
-            const response = await Axios.post(url, data, axiosConfig)
-            .then((res) => {
-                console.log("Resposta Recebida: ", res);
-            })
+            const response = await Axios.post(url, data)
             .catch((err) => {
                 console.log("Axios Error: ", err);
                 this.loading = false;
@@ -78,11 +68,9 @@ export default {
             });
             
             if (response.data == 'ok') { 
-                // console.log('Login Validado!');
                 this.loading = false;
-                window.location.assign('#/home');
+                this.$router.push('/home');
             } else if (response.data != 'ok') {
-                // console.log('Login Inválido!');
                 this.loading = false;
                 this.snackColor = 'red';
                 this.snackText = 'Credenciais incorretas!';
