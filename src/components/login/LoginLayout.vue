@@ -46,19 +46,22 @@ export default {
             this.$emit('close-dialog')
         },
          sendLogin : async function() {
-            const response = await Axios.post('http://localhost/pst_api/loginValidacao.php', {email: this.email, password: this.password});
+            const proxyurl = 'https://cors-anywhere.herokuapp.com/';
+            const url = 'http://unisepe-cotacao.gearhostpreview.com/pst_api/loginValidacao.php';
+            const response = await Axios.post(proxyurl + url, {email: this.email, password: this.password});
             
             if (response.data == 'ok') {
-                console.log('Login Validado!');
+                //console.log('Login Validado!');
                 window.location.assign('#/home');
             } else {
-                console.log('Login Inválido!');
+                //console.log('Login Inválido!');
             }
          }
     },
     components: {
         RegistrarDialog,
-    }
+    },
+    
 }
 </script>
 
