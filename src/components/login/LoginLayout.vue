@@ -46,8 +46,13 @@ export default {
             this.$emit('close-dialog')
         },
          sendLogin : async function() {
-            const response = await Axios.post('http://unisepe-cotacao.gearhostpreview.com/pst_api/loginValidacao.php/', {email: this.email, password: this.password});
-            console.log(response.data);
+            const response = await Axios.post('http://localhost/pst_api/loginValidacao.php', {email: this.email, password: this.password});
+            
+            if (response.data == 'ok') {
+                console.log('Login Validado!');
+            } else {
+                console.log('Login Inválido!');
+            }
          }
     },
     components: {
