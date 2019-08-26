@@ -52,15 +52,18 @@ export default {
          sendLogin : async function() {
             this.loading = true;
 
-            const proxyurl = 'https://cors-anywhere.herokuapp.com/';
             const url = 'http://unisepe-cotacao.gearhostpreview.com/pst_api/loginValidacao.php';
-            const response = await Axios.post(proxyurl + url, {email: this.email, password: this.password});
+            let data = JSON.stringify({
+                email: this.email,
+                password: this.password
+            });
+            const response = await Axios.post(url, data);
             
-            if (response.data == 'ok') {
+            if (response.data == 'ok') { 
                 // console.log('Login Validado!');
                 this.loading = false;
                 window.location.assign('#/home');
-            } else {
+            } else if (response.data != 'ok') {
                 // console.log('Login Inválido!');
                 this.loading = false;
                 this.snackColor = 'red';
