@@ -12,14 +12,12 @@
             <v-form v-model="valid">
                 <v-text-field v-model="email" :rules="emailRules" label="Email" prepend-inner-icon="mdi-email" outlined required></v-text-field>
                 <v-text-field v-model="password" :type="showPass ? 'text' : 'password'"  label="Senha" :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'" prepend-inner-icon="mdi-key" @click:append="showPass = !showPass" outlined required></v-text-field>
-                <div class="mb-2">
-                    <v-btn rounded large block color="green" @click="sendLogin" dark><v-icon left>mdi-login</v-icon>Entrar</v-btn>
-                </div>
-                <!-- <v-btn rounded large block color="accent" to="/registrar" dark><v-icon left>mdi-pencil</v-icon>Registrar</v-btn> -->
+                <v-btn rounded class="mb-2" :loading="loading" :disabled="loading" large block color="green" @click="sendLogin" dark><v-icon left>mdi-login</v-icon>Entrar</v-btn>          
                 <RegistrarDialog />
             </v-form>
         </v-container>
     </v-card>
+    <v-snackbar :color="snackColor" v-model="snackbar" :timeout="timeout">{{ snackText }}</v-snackbar>
     </v-overlay>
 </template>
 
@@ -30,6 +28,7 @@ import Axios from 'axios'
 export default {
     data: () => (
         {
+            loading: false,
             overlay: true,
             valid: false,
             showPass: false,
@@ -38,33 +37,75 @@ export default {
             emailRules: [
                 v => !!v || 'Email é necessário',
                 v => /.@.+/.test(v) || 'Email inválido'
-            ]
+            ],
+            snackbar: false,
+            snackColor: '',
+            snackText: '',
+            timeout: 2000,
         }
     ),
+    
     methods: {
         closeDialog : function() {
             this.$emit('close-dialog')
         },
          sendLogin : async function() {
+            this.loading = true;
+
             const proxyurl = 'https://cors-anywhere.herokuapp.com/';
             const url = 'http://unisepe-cotacao.gearhostpreview.com/pst_api/loginValidacao.php';
             const response = await Axios.post(proxyurl + url, {email: this.email, password: this.password});
             
             if (response.data == 'ok') {
-                //console.log('Login Validado!');
+                // console.log('Login Validado!');
+                this.loading = false;
                 window.location.assign('#/home');
             } else {
-                //console.log('Login Inválido!');
+                // console.log('Login Inválido!');
+                this.loading = false;
+                this.snackColor = 'red';
+                this.snackText = 'Credenciais incorretas!';
+                this.snackbar = true;               
             }
          }
     },
     components: {
         RegistrarDialog,
-    },
-    
+    },    
 }
 </script>
 
 <style>
-
+ @-moz-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @-o-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 </style>
