@@ -57,7 +57,25 @@ export default {
                 email: this.email,
                 password: this.password
             });
-            const response = await Axios.post(url, data);
+            
+            let axiosConfig = {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    "Access-Control-Allow-Origin": "*",
+                }
+            };
+
+            const response = await Axios.post(url, data, axiosConfig)
+            .then((res) => {
+                console.log("Resposta Recebida: ", res);
+            })
+            .catch((err) => {
+                console.log("Axios Error: ", err);
+                this.loading = false;
+                this.snackColor = 'warning';
+                this.snackText = 'Erro de conexão!';
+                this.snackbar = true;
+            });
             
             if (response.data == 'ok') { 
                 // console.log('Login Validado!');
