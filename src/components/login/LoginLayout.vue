@@ -33,6 +33,7 @@ export default {
             valid: false,
             showPass: false,
             email: '',
+            name: 'teste',
             password: '',
             emailRules: [
                 v => !!v || 'Email é necessário',
@@ -58,24 +59,28 @@ export default {
                 password: this.password
             });
 
-            const response = await Axios.post(url, data)
+            await Axios.post(url, data)
             .catch((err) => {
+                // eslint-disable-next-line
                 console.log("Axios Error: ", err);
                 this.loading = false;
                 this.snackColor = 'warning';
                 this.snackText = 'Erro de conexão!';
                 this.snackbar = true;
-            });
-            
-            if (response.data == 'ok') { 
+            })
+            .then(Response => {
+              if (Response.data == 'ok') { 
                 this.loading = false;
                 this.$router.push({name: 'home'});
-            } else if (response.data != 'ok') {
-                this.loading = false;
-                this.snackColor = 'red';
-                this.snackText = 'Credenciais incorretas!';
-                this.snackbar = true;               
-            }
+              } else if (Response.data != 'ok') {
+                  this.loading = false;
+                  this.snackColor = 'red';
+                  this.snackText = 'Credenciais incorretas!';
+                  this.snackbar = true;               
+              }
+            });
+            
+            
          }
     },
     components: {
