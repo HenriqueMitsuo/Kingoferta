@@ -17,17 +17,9 @@
 
         <v-divider></v-divider>
 
-        <v-list-item to="/" dark two-line>
-            <v-list-item-avatar>
-                <v-icon>mdi-account</v-icon>
-            </v-list-item-avatar>
-            <v-list-item-content>
-                <v-list-item-title>Usuário</v-list-item-title>
-                <v-list-item-subtitle>email@email</v-list-item-subtitle>
-            </v-list-item-content>
+        <v-list-item dark two-line>
+            <v-btn block color="red" depressed to="/">Sair</v-btn>
         </v-list-item>   
-
-        <v-divider></v-divider>
     
         <v-list-item-group color="secondary">
             <v-list-item v-for="link in links" :key="link.text" :to="link.route" dark>
