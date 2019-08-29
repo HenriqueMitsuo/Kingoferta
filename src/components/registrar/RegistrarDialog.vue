@@ -16,14 +16,12 @@
                     <v-divider/>
                     <v-stepper-items>
                         <v-stepper-content step="1">
-                            <DadosLayout v-on:valid-data="valid = true" />
-                            <v-btn tile color="green" @click="e1 = 2, valid = false" :disabled="!valid">Continuar</v-btn>
-                            <v-btn tile text @click="dialog = false">Cancelar</v-btn>
+                            <DadosLayout v-on:valid-data="valid = true, e1 = 2" />
+                            <v-btn block text color="secondary" @click="dialog = false">Cancelar</v-btn>
                         </v-stepper-content>
                         <v-stepper-content class="pa-6" step="2">
                             <PesquisaLayout v-on:valid-data="valid = true" />
-                            <v-btn tile color="green" to="/home" :disabled="!valid">Continuar</v-btn>
-                            <v-btn tile text @click="e1 = 1">Cancelar</v-btn>
+                            <v-btn block outlined color="green" to="/home" :disabled="!valid">Continuar</v-btn>
                         </v-stepper-content>
                     </v-stepper-items>
                 </v-stepper>

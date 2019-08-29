@@ -14,17 +14,23 @@
             <v-select v-model="userGender" :rules="userGenderRules" :items="items" label="Gênero" prepend-inner-icon="mdi-human-male-female" filled required></v-select>
             <v-text-field v-model="userCellphone" :rules="userCellphoneRules" v-mask="maskPhone" label="Celular" prepend-inner-icon="mdi-contact-phone" filled required></v-text-field>
             <v-text-field v-model="userPassword" :rules="userPasswordRules" :type="showPass ? 'text' : 'password'" :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'" @click:append="showPass = !showPass" label="Senha" filled prepend-inner-icon="mdi-key" required></v-text-field>
-            <v-btn tile outlined block color="secondary" class="mb-4" @click="validateData">Validar</v-btn>
-        </v-form>        
+            <v-btn block color="success" class="mb-4" @click="validateData">Continuar</v-btn>
+        </v-form>  
+        <v-snackbar :color="snackColor" v-model="snackbar" :timeout="timeout">{{ snackText }}</v-snackbar>      
     </div>
 </template>
 
 <script>
 import { mask } from 'vue-the-mask'
+import Axios from 'axios'
 
 export default {
     name: 'DadosLayout',
     data: () => ({
+        snackbar: false,
+        snackColor: '',
+        snackText: '',
+        timeout: 2000,
         valid: true,
         userName: '',
         userNameRules : [
@@ -53,27 +59,55 @@ export default {
         ],
         modal: false,
         showPass: false,
-        maskPhone: '(##) ##### - ####',
+        maskPhone: '(##) #####-####',
         items: [
             'Masculino',
             'Feminino',
             'Prefiro não dizer'
-        ]
+        ],
     }),
     directives: {
         mask,
     },
     methods: {
-        validateData() {
+        validateData : async function() {
             if (this.$refs.form.validate()) {
-                // eslint-disable-next-line
-                console.log("Dados preenchidos corretamente!");
-                this.$emit('valid-data')
-            } else {
-                 // eslint-disable-next-line
-                console.log("Dados Inválidos");
+
+                // Enviando dados com axios
+                const url = 'http://unisepe-cotacao.gearhostpreview.com/pst_api/loginRegister.php';
+                const data = JSON.stringify({
+                    sendName: this.userName,
+                    sendEmail: this.userEmail,
+                    sendBirthDate: this.userDate,
+                    sendGender: this.userGender,
+                    sendPhone: this.userCellphone,
+                    sendPassword: this.userPassword,
+                });
+
+                await Axios.post(url, data)
+                .catch((err) =>{
+                    // eslint-disable-next-line
+                    console.log(err);
+                    this.snackColor = 'warning';
+                    this.snackText = 'Erro de conexão! Tentar novamente.';
+                    this.snackbar = true;  
+                })
+                .then(Response => {
+                    // eslint-disable-next-line
+                    console.log(Response.data);
+                    if (Response.data == 'sucesso') {
+                        this.$emit('valid-data');
+                    } else {
+                        this.snackColor = 'warning';
+                        this.snackText = 'Erro de conexão! Tentar novamente.';
+                        this.snackbar = true;  
+                    }
+                });
+
+                
+
             }
-        }
+        },
     }
 }
 </script>
