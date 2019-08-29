@@ -73,8 +73,8 @@ export default {
         validateData : async function() {
             if (this.$refs.form.validate()) {
 
-                // Enviando dados com axios
-                const url = 'http://unisepe-cotacao.gearhostpreview.com/pst_api/loginRegister.php';
+                // Enviando dados com Axios.post
+                const url = 'http:1//unisepe-cotacao.gearhostpreview.com/pst_api/loginRegister.php';
                 const data = JSON.stringify({
                     sendName: this.userName,
                     sendEmail: this.userEmail,
@@ -85,27 +85,20 @@ export default {
                 });
 
                 await Axios.post(url, data)
-                .catch((err) =>{
-                    // eslint-disable-next-line
-                    console.log(err);
-                    this.snackColor = 'warning';
-                    this.snackText = 'Erro de conexão! Tentar novamente.';
-                    this.snackbar = true;  
-                })
-                .then(Response => {
-                    // eslint-disable-next-line
-                    console.log(Response.data);
-                    if (Response.data == 'sucesso') {
-                        this.$emit('valid-data');
-                    } else {
+                    .catch((err) =>{
                         this.snackColor = 'warning';
-                        this.snackText = 'Erro de conexão! Tentar novamente.';
+                        this.snackText = 'Erro de conexão! Tentar novamente. (' + err + ')';
                         this.snackbar = true;  
-                    }
-                });
-
-                
-
+                    })
+                    .then(Response => {
+                        if (Response.data == 'sucesso') {
+                            this.$emit('valid-data');
+                        } else {
+                            this.snackColor = 'warning';
+                            this.snackText = 'Erro de conexão! Tentar novamente.';
+                            this.snackbar = true;  
+                        }
+                    });
             }
         },
     }
