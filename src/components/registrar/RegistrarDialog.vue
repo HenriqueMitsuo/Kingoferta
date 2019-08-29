@@ -16,8 +16,8 @@
                     <v-divider/>
                     <v-stepper-items>
                         <v-stepper-content step="1">
-                            <DadosLayout />
-                            <v-btn tile color="green" @click="e1 = 2">Continuar</v-btn>
+                            <DadosLayout v-on:valid-data="valid = true" />
+                            <v-btn tile color="green" @click="e1 = 2"  :disabled="!valid">Continuar</v-btn>
                             <v-btn tile text @click="dialog = false">Cancelar</v-btn>
                         </v-stepper-content>
                         <v-stepper-content class="pa-6" step="2">
@@ -39,6 +39,7 @@ import PesquisaLayout from './PesquisaLayout'
 export default {
     data () {
         return {
+            valid: false,
             e1: 0,
             dialog: false,
         }
