@@ -4,7 +4,7 @@
         <v-checkbox v-model="userCursoSuperior" label="Possuo curso superior"></v-checkbox>
         <v-select v-if="userCursoSuperior == true" v-model="userInterest" :rules="userInterestRules" :items="itemsSuperior" label="Interesse em algum curso?" filled required/>
         <v-select v-if="userCursoSuperior == false" v-model="userInterest" :rules="userInterestRules" :items="itemsNaoSuperior" label="Interesse em algum curso?" filled required/>
-        <v-btn tile outlined block color="secondary" class="mb-4" @click="validateSurvey">Validar</v-btn>
+        <v-btn block color="secondary" class="mb-4" @click="validateSurvey">Validar</v-btn>
       </v-form> 
   </v-flex>
 </template>

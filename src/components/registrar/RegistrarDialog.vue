@@ -21,7 +21,7 @@
                         </v-stepper-content>
                         <v-stepper-content class="pa-6" step="2">
                             <PesquisaLayout v-on:valid-data="valid = true" />
-                            <v-btn block outlined color="green" to="/home" :disabled="!valid">Continuar</v-btn>
+                            <v-btn block color="green" to="/home" :disabled="!valid">Continuar</v-btn>
                         </v-stepper-content>
                     </v-stepper-items>
                 </v-stepper>
