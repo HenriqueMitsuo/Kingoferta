@@ -1,9 +1,10 @@
 <template>
   <v-flex>
-      <v-form>
-        <v-checkbox v-model="checkbox" label="Possuo curso superior"></v-checkbox>
-        <v-select v-if="checkbox == true" v-model="select" :items="itemsSuperior" label="Interesse em algum curso?" filled required/>
-        <v-select v-if="checkbox == false" v-model="select" :items="itemsNaoSuperior" label="Interesse em algum curso?" filled required/>
+      <v-form ref="form" v-model="valid" lazy-validation>
+        <v-checkbox v-model="userCursoSuperior" label="Possuo curso superior"></v-checkbox>
+        <v-select v-if="userCursoSuperior == true" v-model="userInterest" :rules="userInterestRules" :items="itemsSuperior" label="Interesse em algum curso?" filled required/>
+        <v-select v-if="userCursoSuperior == false" v-model="userInterest" :rules="userInterestRules" :items="itemsNaoSuperior" label="Interesse em algum curso?" filled required/>
+        <v-btn block color="secondary" class="mb-4" @click="validateSurvey">Validar</v-btn>
       </v-form> 
   </v-flex>
 </template>
@@ -13,8 +14,12 @@ export default {
     name: 'PesquisaLayout',
     data () {
         return {
-            checkbox: false,
-            select: 'Nenhum',
+            valid: true,
+            userCursoSuperior: false,
+            userInterest: null,
+            userInterestRules: [
+               v => !!v || 'Por favor, selecione um item',
+            ],
             itemsNaoSuperior: [
               'Administração - Presencial',
               'Análise e Des. de Sistemas - Presencial',
@@ -31,6 +36,18 @@ export default {
               'Nenhum'
             ]
         }
+    },
+    methods: {
+      validateSurvey() {
+          if (this.$refs.form.validate()) {
+              // eslint-disable-next-line
+              console.log("Dados preenchidos corretamente!");
+              this.$emit('valid-data')
+          } else {
+                // eslint-disable-next-line
+              console.log("Dados Inválidos");
+          }
+      }
     },
 }
 </script>
