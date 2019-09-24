@@ -5,7 +5,7 @@
         <v-checkbox v-model="userCursoSuperior" label="Possuo curso superior"></v-checkbox>
         <v-select v-if="userCursoSuperior == true" v-model="userInterest" :rules="userInterestRules" :items="itemsSuperior" label="Interesse em algum curso?" filled required/>
         <v-select v-if="userCursoSuperior == false" v-model="userInterest" :rules="userInterestRules" :items="itemsNaoSuperior" label="Interesse em algum curso?" filled required/>
-        <v-btn block color="secondary" class="mb-4" @click="validateSurvey">Validar</v-btn>
+        <v-btn block color="success" class="mb-4" @click="validateSurvey">Continuar</v-btn>
       </v-form> 
   </v-flex>
 </template>
@@ -17,6 +17,10 @@ export default {
     name: 'PesquisaLayout',
     data () {
         return {
+            snackbar: false,
+            snackColor: '',
+            snackText: '',
+            timeout: 2000,
             valid: true,
             userCursoSuperior: false,
             userInterest: null,
@@ -29,7 +33,6 @@ export default {
     },
     async created() {
       // Pegar Cursos Não Superior
-
       await Axios.get('http://unisepe-cotacao.gearhostpreview.com/pst_api/consultaCursosNaoSuperior.php')
         .catch((err) =>{
            // eslint-disable-next-line
@@ -56,9 +59,16 @@ export default {
     methods: {
       validateSurvey() {
           if (this.$refs.form.validate()) {
-              // eslint-disable-next-line
+              let data = {
+                sendUserCode: 1,
+                sendInterest: this.userInterest[0],
+                sendCourse: this.userCursoSuperior,
+              }
+               // eslint-disable-next-line
+              console.log(data);
+               // eslint-disable-next-line
               console.log("Dados preenchidos corretamente!");
-              this.$emit('valid-data')
+              this.$router.push({name: 'home'});
           } else {
                 // eslint-disable-next-line
               console.log("Dados Inválidos");
