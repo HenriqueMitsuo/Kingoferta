@@ -1,4 +1,3 @@
-// Branch RegisterSurvey
 <template>
   <v-flex>
       <v-form ref="form" v-model="valid" lazy-validation>
@@ -27,8 +26,8 @@ export default {
             userInterestRules: [
                v => !!v || 'Por favor, selecione um item',
             ],
-            itemsNaoSuperior: [],
-            itemsSuperior: [],
+            itemsNaoSuperior: null,
+            itemsSuperior: null,
         }
     },
     async created() {
@@ -57,20 +56,26 @@ export default {
         });
     },
     methods: {
-      validateSurvey() {
+      validateSurvey: async function() {
           if (this.$refs.form.validate()) {
-              let data = {
-                sendUserCode: 1,
-                sendInterest: this.userInterest[0],
-                sendCourse: this.userCursoSuperior,
-              }
-               // eslint-disable-next-line
-              console.log(data);
-               // eslint-disable-next-line
+            const url = 'http://unisepe-cotacao.gearhostpreview.com/pst_api/pesquisaRegister.php';
+            const data = JSON.stringify({
+              sendUserCode: 1,
+              sendInterest: this.userInterest[0],
+              sendCourse: this.userCursoSuperior,
+            });
+
+            await Axios.post(url, data)
+              .catch((err) =>{
+                  console.log(err);
+              })
+              .then(Response => {
+                  console.log(Response.data);
+              });
+
               console.log("Dados preenchidos corretamente!");
-              this.$router.push({name: 'home'});
+              //this.$router.push({name: 'home'});
           } else {
-                // eslint-disable-next-line
               console.log("Dados Inválidos");
           }
       },
