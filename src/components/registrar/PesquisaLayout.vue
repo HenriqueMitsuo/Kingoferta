@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import Axios from 'axios';
+
 export default {
     name: 'PesquisaLayout',
     data () {
@@ -21,22 +23,35 @@ export default {
             userInterestRules: [
                v => !!v || 'Por favor, selecione um item',
             ],
-            itemsNaoSuperior: [
-              'Administração - Presencial',
-              'Análise e Des. de Sistemas - Presencial',
-              'Biologia - Presencial',
-              'Direito - Presencial',
-              'Enfermagem - Presencial',
-              'Letras - Presencial/EAD',
-              'Matemática - Presencial',
-              'Nenhum'
-            ],
-            itemsSuperior: [
-              'Gestão Hospitalar - Presencial',
-              'Processos Gerencias - Presencial',
-              'Nenhum'
-            ]
+            itemsNaoSuperior: [],
+            itemsSuperior: [],
         }
+    },
+    async created() {
+      // Pegar Cursos Não Superior
+
+      await Axios.get('http://unisepe-cotacao.gearhostpreview.com/pst_api/consultaCursosNaoSuperior.php')
+        .catch((err) =>{
+           // eslint-disable-next-line
+          console.log(err);
+        })
+        .then(Response => {
+           // eslint-disable-next-line
+          console.log(Response.data);
+          return this.itemsNaoSuperior = Response.data;
+        });
+
+      // Pegar Cursos Superior
+      await Axios.get('http://unisepe-cotacao.gearhostpreview.com/pst_api/consultaCursosSuperior.php')
+        .catch((err) =>{
+           // eslint-disable-next-line
+          console.log(err);
+        })
+        .then(Response => {
+           // eslint-disable-next-line
+          console.log(Response.data);
+          return this.itemsSuperior = Response.data;
+        });
     },
     methods: {
       validateSurvey() {
@@ -48,7 +63,7 @@ export default {
                 // eslint-disable-next-line
               console.log("Dados Inválidos");
           }
-      }
+      },
     },
 }
 </script>
