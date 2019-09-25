@@ -32,27 +32,26 @@ export default {
         }
     },
     async created() {
-      // Pegar Cursos Não Superior
       await Axios.get('http://unisepe-cotacao.gearhostpreview.com/pst_api/consultaCursosNaoSuperior.php')
         .catch((err) =>{
-           // eslint-disable-next-line
-          console.log(err);
+           this.snackColor = 'warning';
+           this.snackText = 'Erro de conexão! Tentar novamente. (' + err + ')';
+           this.snackbar = true;  
+           this.$router.push({name: 'Login'});
         })
         .then(Response => {
-           // eslint-disable-next-line
-          console.log(Response.data);
           return this.itemsNaoSuperior = Response.data;
         });
 
-      // Pegar Cursos Superior
+
       await Axios.get('http://unisepe-cotacao.gearhostpreview.com/pst_api/consultaCursosSuperior.php')
         .catch((err) =>{
-           // eslint-disable-next-line
-          console.log(err);
+           this.snackColor = 'warning';
+           this.snackText = 'Erro de conexão! Tentar novamente. (' + err + ')';
+           this.snackbar = true;  
+           this.$router.push({name: 'Login'});
         })
         .then(Response => {
-           // eslint-disable-next-line
-          console.log(Response.data);
           return this.itemsSuperior = Response.data;
         });
     },
