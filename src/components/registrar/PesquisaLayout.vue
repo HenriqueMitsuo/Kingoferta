@@ -60,7 +60,6 @@ export default {
           if (this.$refs.form.validate()) {
             const url = 'http://unisepe-cotacao.gearhostpreview.com/pst_api/pesquisaRegister.php';
             const data = JSON.stringify({
-              sendUserCode: 1,
               sendInterest: this.userInterest[0],
               sendCourse: this.userCursoSuperior,
             });
