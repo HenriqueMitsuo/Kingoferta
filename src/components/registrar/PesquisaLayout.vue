@@ -6,6 +6,7 @@
         <v-select v-if="userCursoSuperior == false" v-model="userInterest" :rules="userInterestRules" :items="itemsNaoSuperior" item-text="nome" item-value="codigo" label="Interesse em algum curso?" filled required/>
         <v-btn block color="success" class="mb-4" @click="validateSurvey">Continuar</v-btn>
       </v-form> 
+      <v-snackbar :color="snackColor" v-model="snackbar" :timeout="timeout">{{ snackText }}</v-snackbar>      
   </v-flex>
 </template>
 
@@ -66,16 +67,20 @@ export default {
 
             await Axios.post(url, data)
               .catch((err) =>{
-                  console.log(err);
+                  this.snackColor = 'warning';
+                  this.snackText = 'Erro de conexão! Tentar novamente. (' + err + ')';
+                  this.snackbar = true;  
               })
               .then(Response => {
-                  console.log(Response.data);
+                  if (Response.data == 'sucesso') {
+                    this.$router.push({name: 'home'});
+                  } else {
+                    this.snackColor = 'warning';
+                    this.snackText = 'Erro de conexão! Tente novamente.';
+                    this.snackbar = true; 
+                  }    
               });
-
-              console.log("Dados preenchidos corretamente!");
-              //this.$router.push({name: 'home'});
-          } else {
-              console.log("Dados Inválidos");
+              
           }
       },
     },
