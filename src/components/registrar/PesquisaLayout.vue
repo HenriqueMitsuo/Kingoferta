@@ -2,8 +2,8 @@
   <v-flex>
       <v-form ref="form" v-model="valid" lazy-validation>
         <v-checkbox v-model="userCursoSuperior" label="Possuo curso superior"></v-checkbox>
-        <v-select v-if="userCursoSuperior == true" v-model="userInterest" :rules="userInterestRules" :items="itemsSuperior" item-text="nome" item-value="codigo" label="Interesse em algum curso?" filled required/>
-        <v-select v-if="userCursoSuperior == false" v-model="userInterest" :rules="userInterestRules" :items="itemsNaoSuperior" item-text="nome" item-value="codigo" label="Interesse em algum curso?" filled required/>
+        <v-select v-if="userCursoSuperior == true" v-model="userInterest" :rules="userInterestRules" :items="itemsSuperior" item-text="nome" item-value="codigo" label="Interesse em alguma pós-graduação?" filled required/>
+        <v-select v-if="userCursoSuperior == false" v-model="userInterest" :rules="userInterestRules" :items="itemsNaoSuperior" item-text="nome" item-value="codigo" label="Interesse em algum curso superior?" filled required/>
         <v-btn block color="success" class="mb-4" @click="validateSurvey">Continuar</v-btn>
       </v-form> 
       <v-snackbar :color="snackColor" v-model="snackbar" :timeout="timeout">{{ snackText }}</v-snackbar>      
