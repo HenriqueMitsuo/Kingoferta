@@ -1,19 +1,14 @@
 <template>
   <div class="home">
-    <v-card class="mx-auto" outlined>
-      <v-list-item three-line>
-        <v-list-item-content>
-          <div class="overline mb-4">Peruíbe</div>
-          <v-list-item-title class="headline mb-1"><span class="font-weight-light">King</span><span>Ofertas</span></v-list-item-title>
-          <v-list-item-subtitle>Aplicativo para cotação de preços</v-list-item-subtitle>
-        </v-list-item-content>
-
-        <v-list-item-avatar tile size="90">
-          <img src="..\assets\Logo_KingOferta.png" alt="" srcset="">
-        </v-list-item-avatar>
-      </v-list-item>
-      <v-card-actions></v-card-actions>
-    </v-card>
+    <v-carousel height="300" cycle hide-delimiters="true">
+      <v-carousel-item v-for="(color, i) in colors" :key="color">
+        <v-sheet :color="color" height="100%" tile>
+          <v-row class="fill-height" align="center" justify="center">
+            Slide {{i+1}}
+          </v-row>
+        </v-sheet>
+      </v-carousel-item>
+    </v-carousel>
 
     <v-container class="pr-0 pl-0" fluid>
       <v-row>
@@ -47,6 +42,13 @@ export default {
         {icon: 'mdi-baguette', quantity: '220', text: "Produtos"},
         {icon: 'mdi-cash-usd', quantity: '7', text: "Cotações"},
       ],
+      colors: [
+        'primary',
+        'secondary',
+        'yellow darken-2',
+        'red',
+        'orange',
+      ]
     }
   },
   components: {
