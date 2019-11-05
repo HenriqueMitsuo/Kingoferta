@@ -73,7 +73,7 @@ export default {
               if (Response.data.estado == 'ok') { 
                 this.loading = false;
                 this.preferredCourse = Response.data.curso;
-                this.$router.push({name: 'home'});
+                this.$router.push({ name: 'home', params: {curso: this.preferredCourse}} );
               } else if (Response.data != 'ok') {
                   this.loading = false;
                   this.snackColor = 'red';

@@ -4,7 +4,7 @@
       <v-carousel-item v-for="(slide, i) in slides" :key="slide">
         <v-sheet :color="slide" height="100%" tile>
           <v-row class="fill-height" align="center" justify="center">
-            Slide {{i+1}}
+            {{ preferredCourse }} {{i+1}}
           </v-row>
         </v-sheet>
       </v-carousel-item>
@@ -35,6 +35,7 @@ export default {
   name: 'home',
   data() {
     return {
+      preferredCourse: '',
       route: '/consulta/produto/2',
       statistics: [
         {icon: 'mdi-city-variant', quantity: '7', text: "Cidades"},
@@ -52,8 +53,8 @@ export default {
       ]
     }
   },
-  components: {
-
+  created() {
+    this.preferredCourse = this.$route.params.curso;
   }
 }
 </script>
