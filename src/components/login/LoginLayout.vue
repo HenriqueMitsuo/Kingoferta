@@ -35,6 +35,7 @@ export default {
             email: '',
             name: 'teste',
             password: '',
+            preferredCourse: '',
             emailRules: [
                 v => !!v || 'Email é necessário',
                 v => /.@.+/.test(v) || 'Email inválido'
@@ -69,8 +70,9 @@ export default {
                 this.snackbar = true;
             })
             .then(Response => {
-              if (Response.data == 'ok') { 
+              if (Response.data.estado == 'ok') { 
                 this.loading = false;
+                this.preferredCourse = Response.data.curso;
                 this.$router.push({name: 'home'});
               } else if (Response.data != 'ok') {
                   this.loading = false;

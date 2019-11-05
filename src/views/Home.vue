@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <v-carousel height="300" cycle hide-delimiters="true">
-      <v-carousel-item v-for="(color, i) in colors" :key="color">
-        <v-sheet :color="color" height="100%" tile>
+    <v-carousel height="300" cycle :hide-delimiters='true'>
+      <v-carousel-item v-for="(slide, i) in slides" :key="slide">
+        <v-sheet :color="slide" height="100%" tile>
           <v-row class="fill-height" align="center" justify="center">
             Slide {{i+1}}
           </v-row>
@@ -42,12 +42,13 @@ export default {
         {icon: 'mdi-baguette', quantity: '220', text: "Produtos"},
         {icon: 'mdi-cash-usd', quantity: '7', text: "Cotações"},
       ],
-      colors: [
+      slides: [
         'primary',
         'secondary',
         'yellow darken-2',
         'red',
         'orange',
+        'orange darken-3'
       ]
     }
   },
