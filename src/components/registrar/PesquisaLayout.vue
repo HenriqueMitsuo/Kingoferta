@@ -78,8 +78,8 @@ export default {
               })
               .then(Response => {
                   if (Response.data == 'sucesso') {
-                    console.log(Response.data);
-                    this.$router.push({name: 'home'});
+                    
+                    this.$router.push({name: 'home', params: {curso: this.userInterest[0]}});
                   } else {
                     this.snackColor = 'warning';
                     this.snackText = 'Erro de conexão! Tente novamente.';

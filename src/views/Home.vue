@@ -4,7 +4,7 @@
       <v-carousel-item v-for="(slide, i) in slides" :key="slide">
         <v-sheet :color="slide" height="100%" tile>
           <v-row class="fill-height" align="center" justify="center">
-            {{ preferredCourse }} {{i+1}}
+            {{i+1}}
           </v-row>
         </v-sheet>
       </v-carousel-item>
