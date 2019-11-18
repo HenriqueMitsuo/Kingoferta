@@ -1,15 +1,8 @@
 <template>
   <div class="home">
     <v-carousel height="300" cycle :hide-delimiters='true'>
-      <v-carousel-item v-for="(slide, i) in slides" :key="slide">
-        <v-sheet :color="slide" height="100%" tile>
-          <v-row class="fill-height" align="center" justify="center">
-            {{i+1}}
-          </v-row>
-        </v-sheet>
-      </v-carousel-item>
+      <v-carousel-item :src="slide.src"  v-for="(slide) in slides" :key="slide.number" />    
     </v-carousel>
-
     <v-container class="pr-0 pl-0" fluid>
       <v-row>
         <v-col v-for="statistic in statistics" :key="statistic.text" cols="6">
@@ -44,12 +37,10 @@ export default {
         {icon: 'mdi-cash-usd', quantity: '7', text: "Cotações"},
       ],
       slides: [
-        'primary',
-        'secondary',
-        'yellow darken-2',
-        'red',
-        'orange',
-        'orange darken-3'
+        {order: '1', src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'},
+        {order: '2', src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg'},
+        {order: '3', src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',},
+        {order: '4', src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',},    
       ]
     }
   },
