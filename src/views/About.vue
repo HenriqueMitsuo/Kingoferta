@@ -37,7 +37,6 @@ export default {
     return {
       developers: [
         {name: 'Henrique Mitsuo', github: 'https://github.com/HenriqueMitsuo'},
-        {name: 'Jonas Lima', github: 'https://github.com/JonasGabriel'},
         {name: 'Moisés Duarte', github: 'https://github.com/MoisesDuarte'}
       ]
     }
