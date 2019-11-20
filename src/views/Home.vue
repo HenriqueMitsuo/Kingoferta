@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <v-carousel height="300" cycle :hide-delimiters='true'>
-      <v-carousel-item :src="courseImages[image.order]"  v-for="(image) in courseImages" :key="image.order" />    
+      <v-carousel-item :src="image.url"  v-for="(image) in courseImages" :key="image.order" />    
     </v-carousel>
     <v-container class="pr-0 pl-0" fluid>
       <v-row>
@@ -30,7 +30,6 @@ export default {
   name: 'home',
   data() {
     return {
-      objectUrl: '',
       courseImages: [],
       preferredCourse: '',
       isGraduated: '',
@@ -55,33 +54,16 @@ export default {
     // FETCH DE IMAGENS (lógica funcionando, falta arrumar o cors)
     const url = 'http://unisepe-cotacao.gearhostpreview.com/pst_api/consultaImagens.php';
     Axios.post(url, data)
-      .then((Response) => {
-        console.log(Response.data);
-
-        // Requestando e guardando imagem com fetch
-        var i = 0;
-        var id_counter = 0;
-        while (i < Response.data.length) {
-          fetch(Response.data[i])
-          .then((response) => {
-            return response.blob();
-          })
-          .then((myBlob) => {
-            var objectUrl = URL.createObjectURL(myBlob);     
-            this.courseImages.push({order: id_counter, src: objectUrl});     
-            id_counter++;
-          });
-          i++;
-        }   
-  
-      })
-
-    // this.imagesUrls = [
-    //   'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-    //   'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
-    //   'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
-    //   'https://cdn.vuetifyjs.com/images/carousel/planet.jpg'
-    // ]; 
+    .then((Response) => {
+      let i = 0;
+      while(i < Response.data.length) {
+        let url = {
+          url:  Response.data[i]
+        };
+        this.courseImages.push(url);
+        i++;
+      }
+    });
 
   }
 }
