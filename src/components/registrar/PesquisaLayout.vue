@@ -2,8 +2,9 @@
   <v-flex>
       <v-form ref="form" v-model="valid" lazy-validation>
         <v-checkbox v-model="userCursoSuperior" label="Possuo curso superior"></v-checkbox>
-        <v-select v-if="userCursoSuperior == true" v-model="userInterest" :rules="userInterestRules" :items="itemsSuperior" item-text="nome" item-value="codigo" label="Interesse em alguma pós-graduação?" filled required/>
-        <v-select v-if="userCursoSuperior == false" v-model="userInterest" :rules="userInterestRules" :items="itemsNaoSuperior" item-text="nome" item-value="codigo" label="Interesse em algum curso superior?" filled required/>
+        <v-select v-if="userCursoSuperior == false" v-model="userInterest" :rules="userInterestRules" :items="itemsSuperior" item-text="nome" item-value="codigo" label="Interesse em algum curso superior?" filled required/>
+        <v-select v-if="userCursoSuperior == true" v-model="userInterest" :rules="userInterestRules" :items="itemsNaoSuperior" item-text="nome" item-value="codigo" label="Interesse em alguma pós?" filled required/>
+        <v-text-field v-model="userSurveyRA" :rules="userSurveyRARules" label="RA de quem recomendou o app" filled required></v-text-field>
         <v-btn block color="success" class="mb-4" @click="validateSurvey">Continuar</v-btn>
       </v-form> 
       <v-snackbar :color="snackColor" v-model="snackbar" :timeout="timeout">{{ snackText }}</v-snackbar>      
@@ -24,8 +25,12 @@ export default {
             valid: true,
             userCursoSuperior: false,
             userInterest: null,
+            userSurveyRA: null, 
             userInterestRules: [
                v => !!v || 'Por favor, selecione um item',
+            ],
+            userSurveyRARules: [
+              v => !!v || 'Por favor, insira um ra valido',
             ],
             itemsNaoSuperior: null,
             itemsSuperior: null,
@@ -60,8 +65,9 @@ export default {
           if (this.$refs.form.validate()) {
             const url = 'http://unisepe-cotacao.gearhostpreview.com/pst_api/pesquisaRegister.php';
             const data = JSON.stringify({
-              sendInterest: this.userInterest[0],
               sendCourse: this.userCursoSuperior,
+              sendInterest: this.userInterest[0],
+              sendRA: this.userSurveyRA,
             });
 
             await Axios.post(url, data)
@@ -72,7 +78,8 @@ export default {
               })
               .then(Response => {
                   if (Response.data == 'sucesso') {
-                    this.$router.push({name: 'home'});
+                    
+                    this.$router.push({name: 'home', params: {curso: this.userInterest[0]}});
                   } else {
                     this.snackColor = 'warning';
                     this.snackText = 'Erro de conexão! Tente novamente.';
