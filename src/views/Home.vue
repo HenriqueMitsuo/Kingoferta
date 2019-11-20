@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <v-carousel height="300" cycle :hide-delimiters='true'>
-      <v-carousel-item :src="slide.src"  v-for="(slide) in slides" :key="slide.number" />    
+      <v-carousel-item :src="courseImages[image.order]"  v-for="(image) in courseImages" :key="image.order" />    
     </v-carousel>
     <v-container class="pr-0 pl-0" fluid>
       <v-row>
@@ -28,6 +28,8 @@ export default {
   name: 'home',
   data() {
     return {
+      objectUrl: '',
+      courseImages: [],
       preferredCourse: '',
       route: '/consulta/produto/2',
       statistics: [
@@ -36,16 +38,36 @@ export default {
         {icon: 'mdi-baguette', quantity: '220', text: "Produtos"},
         {icon: 'mdi-cash-usd', quantity: '7', text: "Cotações"},
       ],
-      slides: [
-        {order: '1', src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'},
-        {order: '2', src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg'},
-        {order: '3', src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',},
-        {order: '4', src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',},    
-      ]
     }
   },
   created() {
     this.preferredCourse = this.$route.params.curso;
+
+    // Colocar fetch das urls da imagem aqui
+    var imagesUrls = [
+      'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+      'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
+      'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
+      'https://cdn.vuetifyjs.com/images/carousel/planet.jpg'
+    ];
+
+    // Requestando e guardando imagem com fetch
+    var i = 0;
+    var id_counter = 0;
+    while (i < imagesUrls.length) {
+      fetch(imagesUrls[i])
+        .then((response) => {
+          return response.blob();
+        })
+        .then((myBlob) => {
+          var objectUrl = URL.createObjectURL(myBlob);     
+          this.courseImages.push({order: id_counter, src: objectUrl});     
+          id_counter++;
+        });
+
+      i++;
+    }   
+
   }
 }
 </script>
