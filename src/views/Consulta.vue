@@ -1,16 +1,16 @@
 <template>
   <div class="consulta">
-      <ConsultaLayout />
+      <ConsultaTabela />
   </div>
 </template>
 
 <script>
-import ConsultaLayout from '../components/consulta/ConsultaLayout.vue';
+import ConsultaTabela from '../components/consulta/ConsultaTabela.vue';
 
 export default {
     name: 'consulta',
     components: {
-        ConsultaLayout,
+        ConsultaTabela,
     },
 }
 </script>
