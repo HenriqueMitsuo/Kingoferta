@@ -36,6 +36,7 @@ export default {
             name: 'teste',
             password: '',
             preferredCourse: '',
+            isGraduated: '',
             emailRules: [
                 v => !!v || 'Email é necessário',
                 v => /.@.+/.test(v) || 'Email inválido'
@@ -73,8 +74,10 @@ export default {
               if (Response.data.estado == 'ok') { 
                 this.loading = false;
                 this.preferredCourse = Response.data.curso;
+                this.isGraduated = Response.data.pos;
                 this.$router.push({ name: 'home', params: {curso: this.preferredCourse}} );
                 localStorage.setItem('preferredCourse', this.preferredCourse);
+                localStorage.setItem('isGraduated', this.isGraduated);
               } else {
                   this.loading = false;
                   this.snackColor = 'red';

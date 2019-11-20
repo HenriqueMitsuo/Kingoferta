@@ -24,6 +24,8 @@
   </div>
 </template>
 <script>
+import Axios from 'axios'
+
 export default {
   name: 'home',
   data() {
@@ -31,6 +33,7 @@ export default {
       objectUrl: '',
       courseImages: [],
       preferredCourse: '',
+      isGraduated: '',
       route: '/consulta/produto/2',
       statistics: [
         {icon: 'mdi-city-variant', quantity: '7', text: "Cidades"},
@@ -42,33 +45,43 @@ export default {
   },
   created() {
     this.preferredCourse = localStorage.getItem('preferredCourse');
+    this.isGraduated = localStorage.getItem('isGraduated');
 
-    console.log(this.preferredCourse);
+    let data = JSON.stringify({
+      preferredCourse: this.preferredCourse,
+      isGraduated: this.isGraduated
+    });
 
-    // Colocar fetch das urls da imagem aqui
-    var imagesUrls = [
-      'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-      'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
-      'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
-      'https://cdn.vuetifyjs.com/images/carousel/planet.jpg'
-    ];
+    // FETCH DE IMAGENS (lógica funcionando, falta arrumar o cors)
+    const url = 'http://unisepe-cotacao.gearhostpreview.com/pst_api/consultaImagens.php';
+    Axios.post(url, data)
+      .then((Response) => {
+        console.log(Response.data);
 
-    // Requestando e guardando imagem com fetch
-    var i = 0;
-    var id_counter = 0;
-    while (i < imagesUrls.length) {
-      fetch(imagesUrls[i])
-        .then((response) => {
-          return response.blob();
-        })
-        .then((myBlob) => {
-          var objectUrl = URL.createObjectURL(myBlob);     
-          this.courseImages.push({order: id_counter, src: objectUrl});     
-          id_counter++;
-        });
+        // Requestando e guardando imagem com fetch
+        var i = 0;
+        var id_counter = 0;
+        while (i < Response.data.length) {
+          fetch(Response.data[i])
+          .then((response) => {
+            return response.blob();
+          })
+          .then((myBlob) => {
+            var objectUrl = URL.createObjectURL(myBlob);     
+            this.courseImages.push({order: id_counter, src: objectUrl});     
+            id_counter++;
+          });
+          i++;
+        }   
+  
+      })
 
-      i++;
-    }   
+    // this.imagesUrls = [
+    //   'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+    //   'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
+    //   'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
+    //   'https://cdn.vuetifyjs.com/images/carousel/planet.jpg'
+    // ]; 
 
   }
 }
