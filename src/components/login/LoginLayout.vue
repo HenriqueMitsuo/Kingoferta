@@ -74,7 +74,7 @@ export default {
                 this.loading = false;
                 this.preferredCourse = Response.data.curso;
                 this.$router.push({ name: 'home', params: {curso: this.preferredCourse}} );
-              } else if (Response.data != 'ok') {
+              } else {
                   this.loading = false;
                   this.snackColor = 'red';
                   this.snackText = 'Credenciais incorretas!';
