@@ -74,6 +74,7 @@ export default {
                 this.loading = false;
                 this.preferredCourse = Response.data.curso;
                 this.$router.push({ name: 'home', params: {curso: this.preferredCourse}} );
+                localStorage.setItem('preferredCourse', this.preferredCourse);
               } else {
                   this.loading = false;
                   this.snackColor = 'red';

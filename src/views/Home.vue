@@ -41,7 +41,9 @@ export default {
     }
   },
   created() {
-    this.preferredCourse = this.$route.params.curso;
+    this.preferredCourse = localStorage.getItem('preferredCourse');
+
+    console.log(this.preferredCourse);
 
     // Colocar fetch das urls da imagem aqui
     var imagesUrls = [
