@@ -2,8 +2,7 @@
   <v-flex>
       <v-form ref="form" v-model="valid" lazy-validation>
         <v-checkbox v-model="userCursoSuperior" label="Possuo curso superior"></v-checkbox>
-        <v-select v-if="userCursoSuperior == false" v-model="userInterest" :rules="userInterestRules" :items="itemsSuperior" item-text="nome" item-value="codigo" label="Interesse em algum curso superior?" filled required/>
-        <v-select v-if="userCursoSuperior == true" v-model="userInterest" :rules="userInterestRules" :items="itemsNaoSuperior" item-text="nome" item-value="codigo" label="Interesse em alguma pós?" filled required/>
+        <v-select v-model="userInterest" :rules="userInterestRules" :items="itemsSuperior" item-text="nome" item-value="codigo" label="Interesse em algum curso superior?" filled required/>
         <v-text-field v-model="userSurveyRA" :rules="userSurveyRARules" label="RA de quem recomendou o app" filled required></v-text-field>
         <v-btn block color="success" class="mb-4" @click="validateSurvey">Continuar</v-btn>
       </v-form> 
@@ -78,7 +77,6 @@ export default {
               })
               .then(Response => {
                   if (Response.data == 'sucesso') {
-                    
                     this.$router.push({name: 'home', params: {curso: this.userInterest[0]}});
                   } else {
                     this.snackColor = 'warning';
