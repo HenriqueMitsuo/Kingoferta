@@ -2,7 +2,7 @@
   <v-flex>
       <v-form ref="form" v-model="valid" lazy-validation>
         <v-checkbox v-model="userCursoSuperior" label="Possuo curso superior"></v-checkbox>
-        <v-select v-model="userInterest" :rules="userInterestRules" :items="itemsSuperior" item-text="nome" item-value="codigo" label="Interesse em algum curso superior?" filled required/>
+        <v-select v-model="userInterest" :rules="userInterestRules" :items="itemsCurso" item-text="nome" item-value="codigo" label="Interesse em algum curso superior?" filled required/>
         <v-text-field v-model="userSurveyRA" :rules="userSurveyRARules" label="RA de quem recomendou o app" filled required></v-text-field>
         <v-btn block color="success" class="mb-4" @click="validateSurvey">Continuar</v-btn>
       </v-form> 
@@ -31,12 +31,11 @@ export default {
             userSurveyRARules: [
               v => !!v || 'Por favor, insira um ra valido',
             ],
-            itemsNaoSuperior: null,
-            itemsSuperior: null,
+            itemsCurso: null,
         }
     },
     async created() {
-      await Axios.get('http://unisepe-cotacao.gearhostpreview.com/pst_api/consultaCursosNaoSuperior.php')
+      await Axios.get('http://unisepe-cotacao.gearhostpreview.com/pst_api/consultaCursos.php')
         .catch((err) =>{
            this.snackColor = 'warning';
            this.snackText = 'Erro de conexão! Tentar novamente. (' + err + ')';
@@ -44,19 +43,7 @@ export default {
            this.$router.push({name: 'Login'});
         })
         .then(Response => {
-          return this.itemsNaoSuperior = Response.data;
-        });
-
-
-      await Axios.get('http://unisepe-cotacao.gearhostpreview.com/pst_api/consultaCursosSuperior.php')
-        .catch((err) =>{
-           this.snackColor = 'warning';
-           this.snackText = 'Erro de conexão! Tentar novamente. (' + err + ')';
-           this.snackbar = true;  
-           this.$router.push({name: 'Login'});
-        })
-        .then(Response => {
-          return this.itemsSuperior = Response.data;
+          return this.itemsCurso = Response.data;
         });
     },
     methods: {
