@@ -31,20 +31,23 @@
                         <thead>
                             <tr>
                                 <th class="text-left">Produto</th>
-                                <th class="text-left">Preço R$</th>
                                 <th class="text-left">Local</th>
+                                <th class="text-left">Preço R$</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="produto in carrinho" :key="produto.nome">
                                 <td>{{ produto.nome }}</td>
-                                <td>R$ {{ produto.preco }}</td>
                                 <td>{{ produto.local }}</td>
+                                <td>R$ {{ produto.preco }}</td>
                             </tr>
                         </tbody>
                     </template>
                 </v-simple-table>
             </div>
+            <v-sheet color="primary">
+                <p class="text-center subtitle-1 grey--text text--lighten-4">Total - R$ 100.00</p>
+            </v-sheet>
         </v-card>
     </div>
 </template>
