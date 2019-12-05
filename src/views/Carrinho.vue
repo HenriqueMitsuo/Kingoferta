@@ -1,18 +1,22 @@
 <template>
     <div>
         <v-card >
-            <v-card-title class="headline grey--text text--lighten-4 indigo lighten-1">Carrinho de produtos</v-card-title>
+            <v-card-title class="headline grey--text text--lighten-4 indigo darken-1">Carrinho de produtos</v-card-title>
                 <div>
                     <v-card-text>
                         <v-autocomplete
-                        label="Seleção"
-                        outlined
+                        label="Seleção de produtos"
                         dense
                         multiple
                         clearable
                         chips
                         v-model="filtro"
                         :items="produtos"></v-autocomplete>
+                        <v-select
+                        label="Selecione um estabelecimento"
+                        dense
+                        v-model="estabelecimentoFiltro"
+                        :items="estabelecimentos"></v-select>
                     </v-card-text>
                     <v-card-actions class="mt-0 pt-0">
                         <v-btn outlined block :loading="loading" color="primary" @click="fetchProdutos">
@@ -24,7 +28,7 @@
         </v-card>
         <v-divider class="py-2"></v-divider>
         <v-card v-if="carrinho">
-            <v-card-title class="headline grey--text text--lighten-4 indigo lighten-3">Produtos</v-card-title>
+            <v-card-title class="headline grey--text text--lighten-4 indigo lighten-2">Produtos</v-card-title>
             <div>
                 <v-simple-table>
                     <template v-slot:default>
@@ -45,10 +49,11 @@
                     </template>
                 </v-simple-table>
             </div>
-            <v-sheet color="primary">
-                <p class="text-center subtitle-1 grey--text text--lighten-4">Total - R$ 100.00</p>
-            </v-sheet>
+            
         </v-card>
+        <v-sheet tile elevation="7" color="primary" class="mt-1 mb-12">
+                <p class="text-center subtitle-1 grey--text text--lighten-3">Estabelecimento - {Mercado ABC} Total - R$ ###.##</p>
+        </v-sheet>
     </div>
 </template>
 
@@ -58,7 +63,9 @@ export default {
         return {
             loading: false,
             produtos: ['Arroz', 'Feijão', 'Farinha de Trigo', 'Açúcar', 'Fubá', 'Cáfe'],
+            estabelecimentos: ['Tio beba', 'Magnanimo', 'Mercado A', 'Mercado B'],
             filtro: [],
+            estabelecimentoFiltro: '',
             carrinho: [
                 {
                     nome: 'arroz',
