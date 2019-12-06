@@ -39,8 +39,9 @@
                         <tbody>
                             <tr v-for="produto in carrinho" :key="produto.nome">
                                 <td>{{ produto.nome }}</td>
-                                <td>{{ produto.local }}</td>
-                                <td>R$ {{ produto.preco }}</td>
+                                <!-- @TODO: ajustar a nomeclatura padrão -->
+                                <td>{{ produto.estabelecimento }}</td>
+                                <td>{{ produto.valor }}</td>
                             </tr>
                         </tbody>
                     </template>
@@ -52,13 +53,13 @@
         </v-sheet>
 
         <v-expansion-panels accordion inset>
-            <v-expansion-panel >
+            <!-- <v-expansion-panel v-for="estabelecimento in estabelecimentos" :key="estabelecimento">
                 <v-expansion-panel-header class="indigo lighten-1">
-                <p class="title font-weight-bold text-center grey--text text--lighten-3">Carrinho Magnanimo</p>
+                <p class="title font-weight-bold text-center grey--text text--lighten-3">Carrinho {{estabelecimento[1]}}</p>
                 </v-expansion-panel-header>
                 <v-expansion-panel-content>
                 <v-card v-if="carrinho" class="mt-4">
-                    <v-card-title class="headline grey--text text--lighten-4 indigo lighten-2">Produtos - Magnanimo</v-card-title>
+                    <v-card-title class="headline grey--text text--lighten-4 indigo lighten-2">Produtos - {{estabelecimento[1]}}</v-card-title>
                     <div>
                         <v-simple-table>
                             <template v-slot:default>
@@ -69,9 +70,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="produto in carrinho" :key="produto.nome">
+                                    <tr v-for="produto in estabelecimento[0]" :key="produto.nome">
                                         <td>{{ produto.nome }}</td>
-                                        <td>R$ {{ produto.preco }}</td>
+                                        <td>R$ {{ produto.valor }}</td>
                                     </tr>
                                 </tbody>
                             </template>
@@ -80,12 +81,12 @@
                     
                 </v-card>
                 <v-sheet tile elevation="7" color="primary" class="mt-1">
-                        <p class="text-center subtitle-1 grey--text text--lighten-3">Estabelecimento - Magnanimo Total - R$ ###.##</p>
+                        <p class="text-center subtitle-1 grey--text text--lighten-3"> {{estabelecimento[1]}} -  Total - R$ {{estabelecimento[2]}}</p>
                 </v-sheet>
                 </v-expansion-panel-content>
-            </v-expansion-panel>
+            </v-expansion-panel> -->
 
-            <v-expansion-panel>
+            <!-- <v-expansion-panel>
                 <v-expansion-panel-header class="">
                 <p class="title font-weight-bold text-center">Carrinho Tio Beba</p>
                 </v-expansion-panel-header>
@@ -118,40 +119,43 @@
                         <p class="text-center subtitle-1 grey--text text--lighten-3">Estabelecimento - Tio Beba Total - R$ ###.##</p>
                 </v-sheet>
                 </v-expansion-panel-content>
-            </v-expansion-panel>
+            </v-expansion-panel> -->
         </v-expansion-panels>
     </div>
 </template>
 
 <script>
+import Axios from 'axios';
+
 export default {
     data() {
         return {
             loading: false,
-            produtos: ['Arroz', 'Feijão', 'Farinha de Trigo', 'Açúcar', 'Fubá', 'Cáfe'],
             filtro: [],
-            carrinho: [
-                {
-                    nome: 'arroz',
-                    preco: 23,
-                    local: 'tio beba'
-                },
-                {
-                    nome: 'feijão',
-                    preco: 12,
-                    local: 'Mercado B'
-                },
-                {
-                    nome: 'fubá',
-                    preco: 6.50,
-                    local: 'magnanimo'
-                }
-            ]
+            produtos: ['Bisteca Bovina', 'Arroz', 'Feijão', 'Farinha de Trigo', 'Açúcar', 'Fubá'],
+            carrinho: [],
+            estabelecimentos: [],
         }
     },
     methods: {
-        fetchProdutos() {
-            
+
+        fetchProdutos: async function() {
+
+            this.loading = !this.loading;
+
+            const url = 'http://unisepe-cotacao.gearhostpreview.com/pst_api/consultacarrinho.php';
+            const data = JSON.stringify({
+                postFiltro: this.filtro
+            });
+
+            await Axios.post(url, data)
+                .then(Response => {
+                    console.log(Response.data[1][0]);
+                    this.loading = !this.loading;
+                    this.estabelecimentos = Response.data[1];
+
+                    return this.carrinho = Response.data[0];
+                })
         }
     },
 
