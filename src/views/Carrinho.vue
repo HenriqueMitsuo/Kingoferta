@@ -53,38 +53,37 @@
         </v-sheet>
 
         <v-expansion-panels accordion inset>
-            <!-- <v-expansion-panel v-for="estabelecimento in estabelecimentos" :key="estabelecimento">
+            <v-expansion-panel v-for="estabelecimentosNome in estabelecimentosNomes" :key="estabelecimentosNome.total">
                 <v-expansion-panel-header class="indigo lighten-1">
-                <p class="title font-weight-bold text-center grey--text text--lighten-3">Carrinho {{estabelecimento[1]}}</p>
+                    <p class="title font-weight-bold text-center grey--text text--lighten-3">Carrinho {{estabelecimentosNome.estabelecimento_nome}}</p>
                 </v-expansion-panel-header>
                 <v-expansion-panel-content>
-                <v-card v-if="carrinho" class="mt-4">
-                    <v-card-title class="headline grey--text text--lighten-4 indigo lighten-2">Produtos - {{estabelecimento[1]}}</v-card-title>
-                    <div>
-                        <v-simple-table>
-                            <template v-slot:default>
-                                <thead>
-                                    <tr>
-                                        <th class="text-left">Produto</th>
-                                        <th class="text-left">Preço R$</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="produto in estabelecimento[0]" :key="produto.nome">
-                                        <td>{{ produto.nome }}</td>
-                                        <td>R$ {{ produto.valor }}</td>
-                                    </tr>
-                                </tbody>
-                            </template>
-                        </v-simple-table>
-                    </div>
-                    
-                </v-card>
-                <v-sheet tile elevation="7" color="primary" class="mt-1">
-                        <p class="text-center subtitle-1 grey--text text--lighten-3"> {{estabelecimento[1]}} -  Total - R$ {{estabelecimento[2]}}</p>
-                </v-sheet>
+                    <v-card v-if="carrinho" class="mt-4">
+                        <v-card-title class="headline grey--text text--lighten-4 indigo lighten-2">Produtos - {{estabelecimentosNome.estabelecimento_nome}}</v-card-title>
+                        <div>
+                            <v-simple-table>
+                                <template v-slot:default>
+                                    <thead>
+                                        <tr>
+                                            <th class="text-left">Produto</th>
+                                            <th class="text-left">Preço R$</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="produto in estabelecimentos" :key="produto.valor">
+                                            <td>{{ produto.nome }}</td>
+                                            <td>R$ {{ produto.valor }}</td>
+                                        </tr>
+                                    </tbody>
+                                </template>
+                            </v-simple-table>
+                        </div>
+                    </v-card>
+                    <v-sheet tile elevation="7" color="primary" class="mt-1">
+                            <p class="text-center subtitle-1 grey--text text--lighten-3"> {{estabelecimentosNome.estabelecimento_nome}} -  Total - R$ {{estabelecimentosNome.total}}</p>
+                    </v-sheet>
                 </v-expansion-panel-content>
-            </v-expansion-panel> -->
+            </v-expansion-panel>
 
             <!-- <v-expansion-panel>
                 <v-expansion-panel-header class="">
@@ -135,6 +134,7 @@ export default {
             produtos: ['Bisteca Bovina', 'Arroz', 'Feijão', 'Farinha de Trigo', 'Açúcar', 'Fubá'],
             carrinho: [],
             estabelecimentos: [],
+            estabelecimentosNomes: [],
         }
     },
     methods: {
@@ -143,19 +143,36 @@ export default {
 
             this.loading = !this.loading;
 
-            const url = 'http://unisepe-cotacao.gearhostpreview.com/pst_api/consultacarrinho.php';
+            const urlProdutos = 'http://unisepe-cotacao.gearhostpreview.com/pst_api/consultacarrinho.php';
+            const urlEstabelecimentos = 'http://unisepe-cotacao.gearhostpreview.com/pst_api/consultaestabelecimentos.php';
+
             const data = JSON.stringify({
                 postFiltro: this.filtro
             });
 
-            await Axios.post(url, data)
+            // @FETCH CARRINHO GERAL
+            await Axios.post(urlProdutos, data)
                 .then(Response => {
-                    console.log(Response.data[1][0]);
-                    this.loading = !this.loading;
-                    this.estabelecimentos = Response.data[1];
 
-                    return this.carrinho = Response.data[0];
-                })
+                    return this.carrinho = Response.data;
+                });
+
+            // @FETCH CARRINHO ESTABELECIMENTOS
+            await Axios.post(urlEstabelecimentos, data)
+                .then(Response => {
+                    
+                    let teste = [];
+                    
+                    teste = Response.data;
+                    
+                    this.estabelecimentosNomes = teste[1];
+                    this.estabelecimentos = teste;
+                    this.estabelecimentos.splice(1);
+                });
+
+            console.log(this.estabelecimentos);
+
+            this.loading = !this.loading;
         }
     },
 
