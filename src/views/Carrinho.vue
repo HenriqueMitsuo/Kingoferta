@@ -70,9 +70,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="produto in estabelecimentos" :key="produto.valor">
+                                        <tr v-for="produto in estabelecimentos" 
+                                        v-if="produto.estabelecimento == estabelecimentosNome.estabelecimento_nome" :key="produto.valor" >
                                             <td>{{ produto.nome }}</td>
-                                            <td>R$ {{ produto.valor }}</td>
+                                            <td>{{ produto.valor }}</td>
                                         </tr>
                                     </tbody>
                                 </template>
@@ -84,48 +85,13 @@
                     </v-sheet>
                 </v-expansion-panel-content>
             </v-expansion-panel>
-
-            <!-- <v-expansion-panel>
-                <v-expansion-panel-header class="">
-                <p class="title font-weight-bold text-center">Carrinho Tio Beba</p>
-                </v-expansion-panel-header>
-                <v-expansion-panel-content>
-                <v-card v-if="carrinho" class="mt-4">
-                    <v-card-title class="headline grey--text text--lighten-4">Produtos - Tio Beba</v-card-title>
-                    <div>
-                        <v-simple-table>
-                            <template v-slot:default>
-                                <thead>
-                                    <tr>
-                                        <th class="text-left">Produto</th>
-                                        
-                                        <th class="text-left">Preço R$</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="produto in carrinho" :key="produto.nome">
-                                        <td>{{ produto.nome }}</td>
-                                        
-                                        <td>R$ {{ produto.preco }}</td>
-                                    </tr>
-                                </tbody>
-                            </template>
-                        </v-simple-table>
-                    </div>
-                    
-                </v-card>
-                <v-sheet tile elevation="7" color="primary" class="mt-1">
-                        <p class="text-center subtitle-1 grey--text text--lighten-3">Estabelecimento - Tio Beba Total - R$ ###.##</p>
-                </v-sheet>
-                </v-expansion-panel-content>
-            </v-expansion-panel> -->
         </v-expansion-panels>
     </div>
 </template>
 
 <script>
 import Axios from 'axios';
-
+/* eslint-disable */
 export default {
     data() {
         return {
@@ -162,15 +128,18 @@ export default {
                 .then(Response => {
                     
                     let teste = [];
-                    
+                    let teste1 = [];
+
                     teste = Response.data;
-                    
-                    this.estabelecimentosNomes = teste[1];
+                    teste1 = Response.data;
+
+                    this.estabelecimentosNomes = teste1.pop();
                     this.estabelecimentos = teste;
-                    this.estabelecimentos.splice(1);
+                    //this.estabelecimentos.pop();
                 });
 
             console.log(this.estabelecimentos);
+            console.log(this.estabelecimentosNomes);
 
             this.loading = !this.loading;
         }
