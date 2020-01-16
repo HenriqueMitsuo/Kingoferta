@@ -53,7 +53,7 @@ export default {
     });
 
     // FETCH DE IMAGENS (lógica funcionando, falta arrumar o cors)
-    const url = 'http://unisepe-cotacao.gearhostpreview.com/pst_api/consultaImagens.php';
+    const url = 'http://cotapreco.iesep.com.br/pst_api/consultaImagens.php';
     Axios.post(url, data)
     .then((Response) => {
       let i = 0;

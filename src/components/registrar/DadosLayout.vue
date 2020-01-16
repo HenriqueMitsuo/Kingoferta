@@ -74,7 +74,7 @@ export default {
             if (this.$refs.form.validate()) {
 
                 // Enviando dados com Axios.post
-                const url = 'http://unisepe-cotacao.gearhostpreview.com/pst_api/loginRegister.php';
+                const url = 'http://cotapreco.iesep.com.br/pst_api/loginRegister.php';
                 const data = JSON.stringify({
                     sendName: this.userName,
                     sendEmail: this.userEmail,

@@ -35,7 +35,7 @@ export default {
         }
     },
     async created() {
-      await Axios.get('http://unisepe-cotacao.gearhostpreview.com/pst_api/consultaCursos.php')
+      await Axios.get('http://cotapreco.iesep.com.br/pst_api/consultaCursos.php')
         .catch((err) =>{
            this.snackColor = 'warning';
            this.snackText = 'Erro de conexão! Tentar novamente. (' + err + ')';
@@ -49,7 +49,7 @@ export default {
     methods: {
       validateSurvey: async function() {
           if (this.$refs.form.validate()) {
-            const url = 'http://unisepe-cotacao.gearhostpreview.com/pst_api/pesquisaRegister.php';
+            const url = 'http://cotapreco.iesep.com.br/pst_api/pesquisaRegister.php';
             const data = JSON.stringify({
               sendCourse: this.userCursoSuperior,
               sendInterest: this.userInterest[0],

@@ -37,7 +37,7 @@ export default {
         }
     },
     async created () {
-        await fetch("http://unisepe-cotacao.gearhostpreview.com/pst_api/consultacotacao.php")
+        await fetch("http://cotapreco.iesep.com.br/pst_api/consultacotacao.php")
             .then(Response => {
                 return Response.json();
             })

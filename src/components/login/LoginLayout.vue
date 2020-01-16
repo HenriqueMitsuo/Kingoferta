@@ -55,7 +55,7 @@ export default {
          sendLogin : async function() {
             this.loading = true;
 
-            const url = 'http://unisepe-cotacao.gearhostpreview.com/pst_api/loginValidacao.php';
+            const url = 'http://cotapreco.iesep.com.br/pst_api/loginValidacao.php';
             let data = JSON.stringify({
                 email: this.email,
                 password: this.password

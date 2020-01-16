@@ -97,7 +97,7 @@ export default {
         return {
             loading: false,
             filtro: [],
-            produtos: ['Bisteca Bovina', 'Arroz', 'Feijão', 'Farinha de Trigo', 'Açúcar', 'Fubá'],
+            produtos: ['Bisteca Bovina', 'Arroz', 'Feijão', 'Óleo de soja', 'Açúcar', 'Sal', 'Café', 'Molho de tomate', 'Macarrão'],
             carrinho: [],
             estabelecimentos: [],
             estabelecimentosNomes: [],
@@ -109,8 +109,8 @@ export default {
 
             this.loading = !this.loading;
 
-            const urlProdutos = 'http://unisepe-cotacao.gearhostpreview.com/pst_api/consultacarrinho.php';
-            const urlEstabelecimentos = 'http://unisepe-cotacao.gearhostpreview.com/pst_api/consultaestabelecimentos.php';
+            const urlProdutos = 'http://cotapreco.iesep.com.br/pst_api/consultacarrinho.php';
+            const urlEstabelecimentos = 'http://cotapreco.iesep.com.br/pst_api/consultaestabelecimentos.php';
 
             const data = JSON.stringify({
                 postFiltro: this.filtro
