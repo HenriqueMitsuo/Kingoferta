@@ -14,6 +14,11 @@
             <v-select v-model="userGender" :rules="userGenderRules" :items="items" label="Gênero" prepend-inner-icon="mdi-human-male-female" filled required></v-select>
             <v-text-field v-model="userCellphone" :rules="userCellphoneRules" v-mask="maskPhone" label="Celular" prepend-inner-icon="mdi-contact-phone" filled required></v-text-field>
             <v-text-field v-model="userPassword" :rules="userPasswordRules" :type="showPass ? 'text' : 'password'" :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'" @click:append="showPass = !showPass" label="Senha" filled prepend-inner-icon="mdi-key" required></v-text-field>
+            <!-- @TODO: Adicionar termo de aceite -->
+            <v-checkbox
+            v-model="checkbox"
+            label="Concordo com os termos de uso"
+            ></v-checkbox>
             <v-btn block color="success" class="mb-4" @click="validateData">Continuar</v-btn>
         </v-form>  
         <v-snackbar :color="snackColor" v-model="snackbar" :timeout="timeout">{{ snackText }}</v-snackbar>      
@@ -27,6 +32,7 @@ import Axios from 'axios'
 export default {
     name: 'DadosLayout',
     data: () => ({
+        checkbox: '',
         snackbar: false,
         snackColor: '',
         snackText: '',
