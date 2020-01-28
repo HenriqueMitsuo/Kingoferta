@@ -97,7 +97,7 @@ export default {
         return {
             loading: false,
             filtro: [],
-            produtos: ['Bisteca Bovina', 'Acetato de Dexamentasona', 'Arroz', 'Feijão Carioca', 'Óleo de soja', 'Açúcar', 'Sal', 'Café', 'Molho de tomate', 'Macarrão'],
+            produtos: ['Açúcar Refinado', 'Alface', 'Acetato de Dexamentasona', 'Achocolatado em pó', 'Bisteca Bovina', 'Cebola', 'Café torrado com selo Abic', 'Feijão Carioca', 'Farinha de Mandioca', 'Fubá', 'Geladeira', 'Maionese', 'Macarrão Instantâneo', 'Óleo de soja', 'Sal Refinado'],
             carrinhos: [],
             estabelecimentoDados: [],
             estabelecimentoProdutos: [],

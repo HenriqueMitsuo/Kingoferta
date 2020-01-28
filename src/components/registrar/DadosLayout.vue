@@ -17,8 +17,9 @@
             <!-- @TODO: Adicionar termo de aceite -->
             <v-checkbox
             v-model="checkbox"
-            label="Concordo com os termos de uso"
-            ></v-checkbox>
+            >
+            <div slot='label'>Concordo com os <a @click.stop href="http://cotapreco.iesep.com.br/pst_termo/Termo.pdf" target="_blank" class="secondary--text">termos de uso </a></div>
+            </v-checkbox>
             <v-btn block color="success" class="mb-4" @click="validateData">Continuar</v-btn>
         </v-form>  
         <v-snackbar :color="snackColor" v-model="snackbar" :timeout="timeout">{{ snackText }}</v-snackbar>      

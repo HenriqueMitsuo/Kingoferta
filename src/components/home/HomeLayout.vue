@@ -19,9 +19,11 @@
           </v-card>   
         </v-col>
       </v-row>
+      <v-btn color="primary" to="/consulta/produto/1" block><v-icon>mdi-magnify</v-icon>Pesquisar Ofertas </v-btn>
     </v-container>
 
-    <v-btn color="primary" to="/consulta/produto/1" block><v-icon>mdi-magnify</v-icon> Procurar</v-btn>
+    
+    <v-btn color="primary" to="/carrinho" block><v-icon>mdi-cart</v-icon>Carrinho de compras </v-btn>
   </div>
 </template>
 <script>
